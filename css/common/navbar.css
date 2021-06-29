@@ -39,6 +39,7 @@
             height:44px;
             padding:0 16px;
             line-height:44px;
+            box-sizing:border-box;
         }
         .navbar .navbar-content .nav-item:hover {
             font-size: 13px;
@@ -51,10 +52,25 @@
             color: ##019160;
         }
             .navbar .navbar-content .nav-item .nav-item-icon {
-                background-image: url('/content/icon/document-online.png');
                 width: 20px;
                 height: 20px;
                 background-size:contain;
                 background-repeat:no-repeat;
                 align-self:center;
-            } 
+                margin-right:8px;
+            }
+            .nav-item .nav-item-document-online {
+                background-image: url('/content/icon/document-online.png');
+            }
+            .nav-item .nav-item-report {
+                background-image: url('/content/icon/report.png');
+            }
+            .nav-item .nav-item-dashboard {
+                background-image: url('/content/icon/dashboard.png');
+            }
+            .nav-item .nav-item-dic-employee {
+                background-image: url('/content/icon/dic-employee.png');
+            }
+            .nav-item .nav-item-setting {
+                background-image: url('/content/icon/setting.png');
+            }
