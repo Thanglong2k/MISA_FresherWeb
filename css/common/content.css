@@ -1,0 +1,9 @@
+﻿.content{
+    width: calc(100% - 221px);
+    height: calc(100vh - 60px);
+    background-color: green;
+    position:absolute;
+    top:61px;
+    left:221px;p
+
+}
