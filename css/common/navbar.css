@@ -50,11 +50,12 @@
             background-color: #019160;
             color: #019160;
         }
-            .navbar .navbar-content .nav-item .nav-item-icon {
-                background-image: url('/content/icon/document-online.png');
-                width: 20px;
-                height: 20px;
-                background-size:contain;
-                background-repeat:no-repeat;
-                align-self:center;
-            } 
+        .navbar .navbar-content .nav-item .nav-item-icon {
+            background-image: url('/content/icon/document-online.png');
+            width: 20px;
+            height: 20px;
+            background-size:contain;
+            background-repeat:no-repeat;
+            align-self:center;
+            margin-right:8px;
+        } 
