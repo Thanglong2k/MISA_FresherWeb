@@ -3,12 +3,11 @@
     display: flex;
     align-items: center;
     height: 40px;
-    border:1px solid #ccc;
 }
 .filter-bar .filter-left{
-    
+    padding-left:16px;
 }
-    .filter-bar .filter-right {
-        position:absolute;
-
-    }
+.filter-bar .filter-right {
+    position:absolute;
+    right:16px;
+}

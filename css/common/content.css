@@ -23,10 +23,62 @@
     }
     /*Filter bar*/
     .content .filter-bar {
+        display:flex;
+        
     }
-/*Grid*/
-.content .grid {
-}
+
 /*Paging bar*/
 .content .paging-bar {
+    height:56px;
+    display:flex;
+    justify-content:space-between;
+    padding:10px 16px;
+    border-top:1px solid #bbbbbb;
+    position:relative;
+    box-sizing:border-box;
 }
+.paging-bar .page-number-show, .paging-bar .row-limit {
+    height: 100%;
+    line-height: 35px;
+}
+.paging-bar .paging-number{
+    height:100%;
+}
+
+    .paging-bar .paging-number .pagination {
+        display: inline-block;
+        border: 1px solid #bbbbbb;
+        margin-left:10px;
+        width: 30px;
+        height: 30px;
+        float: left;
+        line-height:30px;
+        text-align:center;
+        border-radius: 50%;
+        text-decoration:none;
+        color:black;
+        background-color:#dcdbdb;
+
+    }
+.icon-page {
+    font-weight: bold;
+    font-size: 24px;
+     line-height:30px;
+}
+.paging-bar .paging-number .pagination.page-move {
+    display: inline-block;
+    border: none;
+    margin-left: 10px;
+    width: 30px;
+    height: 30px;
+    float: left;
+    line-height: 30px;
+    text-align: center;
+    border-radius: 50%;
+    text-decoration: none;
+    color: black;
+    background-color:none;
+}
+
+        
+        
