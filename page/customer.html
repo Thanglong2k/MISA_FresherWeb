@@ -3,8 +3,236 @@
 <head>
     <meta charset="utf-8" />
     <title></title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="/css/common/main.css" rel="stylesheet" />
+    <link href="/css/common/header.css" rel="stylesheet" />
+    <link href="/css/common/navbar.css" rel="stylesheet" />
+    <link href="/css/common/content.css" rel="stylesheet" />
+    <link href="/css/common/icon.css" rel="stylesheet" />
+    <link href="/css/common/button.css" rel="stylesheet" />
+    <link href="/css/common/toolbar.css" rel="stylesheet" />
+    <link href="/css/common/input.css" rel="stylesheet" />
+    <link href="/css/common/grid.css" rel="stylesheet" />
+    <link href="../css/common/common.css" rel="stylesheet" />
+    <link href="/css/page/employee.css" rel="stylesheet" />
 </head>
 <body>
+    <div class="navbar">
+        <div class="logo-site">
+            <div class="logo-box">
+                <div class="toggle-icon"></div>
+                <div class="amis-logo"></div>
+            </div>
 
+        </div>
+        <div class="navbar-content">
+            <a class="nav-item">
+                <div class="nav-item-icon nav-item-document-online"></div>
+                <div class="nav-item-text">Hồ sơ điện tử</div>
+            </a>
+            <a class="nav-item">
+                <div class="nav-item-icon nav-item-document-online"></div>
+                <div class="nav-item-text">Hồ sơ giấy</div>
+            </a>
+            <a class="nav-item">
+                <div class="nav-item-icon nav-item-report"></div>
+                <div class="nav-item-text">Theo dõi chi</div>
+            </a>
+            <a class="nav-item" href="employee.html">
+                <div class="nav-item-icon nav-item-dic-employee"></div>
+                <div class="nav-item-text">Danh mục nhân viên</div>
+            </a>
+            <a class="nav-item" href="customer.html">
+                <div class="nav-item-icon nav-item-dic-employee"></div>
+                <div class="nav-item-text">Danh mục khách hàng</div>
+            </a>
+            <a class="nav-item">
+                <div class="nav-item-icon nav-item-setting"></div>
+                <div class="nav-item-text">Thiết lập</div>
+            </a>
+        </div>
+    </div>
+    <div class="header">
+        <div class="header_region">
+            <!--<div class="region_dropdown">Nhà hàng Biển Đông</div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
+            </svg>-->
+            <select class="select-restaurent">
+                <option>Nhà hàng Biển Đông</option>
+            </select>
+        </div>
+        <!-- header right -->
+        <div class="account_info">
+            <!-- icon bell -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bell" viewBox="0 0 16 16">
+                <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zM8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z" />
+            </svg>
+            <div class="right_item account_avartar"></div>
+            <div class="right_item account_name">
+                Trần Thăng Long
+            </div>
+            <!--<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots-vertical right_item" viewBox="0 0 16 16">
+                <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
+            </svg>-->
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots right_item" viewBox="0 0 16 16">
+                <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" />
+            </svg>
+        </div>
+
+
+    </div>
+    <div class="content">
+        <div class="header-content">
+            <div class="title">Danh sách Khách hàng</div>
+            <div class="content-feature">
+                <button class="m-btn m-btn-default">
+                    <div class="m-btn-icon icon-add"></div>
+                    <div class="btn-text">Thêm Khách hàng</div>
+                </button>
+            </div>
+        </div>
+        <div class="filter-bar">
+            <div class="filter-left">
+                <input class="icon-search input-search" type="text" placeholder="Tìm kiếm theo Mã, Tên Khách hàng" />
+                <select>
+                    <option>Phòng đào tạo</option>
+                </select>
+            </div>
+            <div class="filter-right">
+                <button class="m-second-button m-btn-refresh"></button>
+            </div>
+        </div>
+        <div class="grid grid-employee">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Mã Khách hàng</th>
+                        <th>Họ và tên</th>
+                        <th>Giới tính</th>
+                        <th>Ngày sinh</th>
+                        <th>Số điện thoại</th>
+                        <th>Email</th>
+                        <th>Địa chỉ</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>NV00001</td>
+                        <td>Trần thăng long</td>
+                        <td>Nam</td>
+                        <td class="text-align-center">14/11/2000</td>
+                        <td>0999999999</td>
+                        <td>thanglong2222@gmail.com</td>
+                        <td style="max-width:250px" title="Huwng yeen">Hưng Yêncsdhd dfhdjsfhs dfjdshfdjsfds fdshfdsjfhsdjf jsdfhdsjfhd </td>
+
+
+                    </tr>
+                    <tr>
+                        <td>NV00001</td>
+                        <td>Trần thăng long</td>
+                        <td>Nam</td>
+                        <td>14/11/2000</td>
+                        <td>0999999999</td>
+                        <td>thanglong2222@gmail.com</td>
+                        <td style="max-width:250px">Hưng Yêncsdhd dfhdjsfhs dfjdshfdjsfds fdshfdsjfhsdjf jsdfhdsjfhd </td>
+
+
+                    </tr>
+                    <tr>
+                        <td>NV00001</td>
+                        <td>Trần thăng long</td>
+                        <td>Nam</td>
+                        <td>14/11/2000</td>
+                        <td>0999999999</td>
+                        <td>thanglong2222@gmail.com</td>
+                        <td style="max-width:250px">Hưng Yêncsdhd dfhdjsfhs dfjdshfdjsfds fdshfdsjfhsdjf jsdfhdsjfhd </td>
+
+
+                    </tr>
+                    <tr>
+                        <td>NV00001</td>
+                        <td>Trần thăng long</td>
+                        <td>Nam</td>
+                        <td>14/11/2000</td>
+                        <td>0999999999</td>
+                        <td>thanglong2222@gmail.com</td>
+                        <td style="max-width:250px">Hưng Yêncsdhd dfhdjsfhs dfjdshfdjsfds fdshfdsjfhsdjf jsdfhdsjfhd </td>
+
+
+                    </tr>
+                    <tr>
+                        <td>NV00001</td>
+                        <td>Trần thăng long</td>
+                        <td>Nam</td>
+                        <td>14/11/2000</td>
+                        <td>0999999999</td>
+                        <td>thanglong2222@gmail.com</td>
+                        <td style="max-width:250px">Hưng Yêncsdhd dfhdjsfhs dfjdshfdjsfds fdshfdsjfhsdjf jsdfhdsjfhd </td>
+
+
+                    </tr>
+                    <tr>
+                        <td>NV00001</td>
+                        <td>Trần thăng long</td>
+                        <td>Nam</td>
+                        <td>14/11/2000</td>
+                        <td>0999999999</td>
+                        <td>thanglong2222@gmail.com</td>
+                        <td style="max-width:250px">Hưng Yêncsdhd dfhdjsfhs dfjdshfdjsfds fdshfdsjfhsdjf jsdfhdsjfhd </td>
+
+
+                    </tr>
+                    <tr>
+                        <td>NV00001</td>
+                        <td>Trần thăng long</td>
+                        <td>Nam</td>
+                        <td>14/11/2000</td>
+                        <td>0999999999</td>
+                        <td>thanglong2222@gmail.com</td>
+                        <td style="max-width:250px">Hưng Yêncsdhd dfhdjsfhs dfjdshfdjsfds fdshfdsjfhsdjf jsdfhdsjfhd </td>
+
+
+                    </tr>
+
+
+
+
+
+                </tbody>
+            </table>
+        </div>
+        <div class="paging-bar">
+            <div class="page-number-show">Hiển thị 1-10/1000 Khách hàng</div>
+            <div class="paging-number">
+                <a class="pagination page-move" href="#"><i class="fa fa-angle-double-left icon-page"></i></a>
+                <a class="pagination page-move" href="#"><i class="fa fa-angle-left icon-page"></i></a>
+                <a class="pagination" href="#">1</a>
+                <a class="pagination" href="#">2</a>
+                <a class="pagination" href="#">3</a>
+                <a class="pagination" href="#">4</a>
+                <a class="pagination page-move" href="#"><i class="fa fa-angle-right icon-page"></i></a>
+                <a class="pagination page-move" href="#"><i class="fa fa-angle-double-right icon-page"></i></a>
+            </div>
+            <div class="row-limit">10 Khách hàng/trang</div>
+        </div>
+    </div>
+    <!--thứ tự nhúng jquery :jquery,common,js-->
+    <script src="/lib/jquery-3.6.0.min.js"></script>
+    <script src="/js/common/common.js"></script>
+    <script src="/js/common/base.js"></script>
+    <script src="/js/page/customer.js"></script>
+
+    <script>
+        function formatMoney(money) {
+            var num = money.toFixed(1).replace(/\d(?=(\d{3})+\.)/g, "$&.");
+            return num;
+
+        }
+        var tien = "";
+        tien = formatMoney(2000000)
+        document.getElementById("salary").innerHTML = tien;
+    </script>
 </body>
 </html>

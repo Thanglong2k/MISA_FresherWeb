@@ -9,10 +9,12 @@
     <link href="/css/common/navbar.css" rel="stylesheet" />
     <link href="/css/common/content.css" rel="stylesheet" />
     <link href="/css/common/icon.css" rel="stylesheet" />
+    <link href="/css/common/dialog.css" rel="stylesheet" />
     <link href="/css/common/button.css" rel="stylesheet" />
     <link href="/css/common/toolbar.css" rel="stylesheet" />
     <link href="/css/common/input.css" rel="stylesheet" />
     <link href="/css/common/grid.css" rel="stylesheet" />
+    <link href="../css/common/common.css" rel="stylesheet" />
     <link href="/css/page/employee.css" rel="stylesheet" />
 </head>
 <body>
@@ -22,33 +24,33 @@
                 <div class="toggle-icon"></div>
                 <div class="amis-logo"></div>
             </div>
-            
+
         </div>
         <div class="navbar-content">
-            <div class="nav-item">
+            <a class="nav-item">
                 <div class="nav-item-icon nav-item-document-online"></div>
                 <div class="nav-item-text">Hồ sơ điện tử</div>
-            </div>
-            <div class="nav-item">
+            </a>
+            <a class="nav-item">
                 <div class="nav-item-icon nav-item-document-online"></div>
                 <div class="nav-item-text">Hồ sơ giấy</div>
-            </div>
-            <div class="nav-item">
+            </a>
+            <a class="nav-item">
                 <div class="nav-item-icon nav-item-report"></div>
                 <div class="nav-item-text">Theo dõi chi</div>
-            </div>
-            <div class="nav-item">
-                <div class="nav-item-icon nav-item-dashboard"></div>
-                <div class="nav-item-text">Theo dõi đóng</div>
-            </div>
-            <div class="nav-item">
+            </a>
+            <a class="nav-item" href="employee.html">
                 <div class="nav-item-icon nav-item-dic-employee"></div>
-                <div class="nav-item-text">Quản lý hoạt động</div>
-            </div>
-            <div class="nav-item">
+                <div class="nav-item-text">Danh mục nhân viên</div>
+            </a>
+            <a class="nav-item" href="customer.html">
+                <div class="nav-item-icon nav-item-dic-employee"></div>
+                <div class="nav-item-text">Danh mục khách hàng</div>
+            </a>
+            <a class="nav-item">
                 <div class="nav-item-icon nav-item-setting"></div>
                 <div class="nav-item-text">Thiết lập</div>
-            </div>
+            </a>
         </div>
     </div>
     <div class="header">
@@ -69,7 +71,7 @@
             </svg>
             <div class="right_item account_avartar"></div>
             <div class="right_item account_name">
-                thần Thăng Long
+                Trần Thăng Long
             </div>
             <!--<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots-vertical right_item" viewBox="0 0 16 16">
                 <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
@@ -106,56 +108,111 @@
             <table>
                 <thead>
                     <tr>
-                        <th>Mã nhân viên</th>
-                        <th>Họ và tên</th>
-                        <th>Ngày sinh</th>
-                        <th>Giới tính</th>
-                        <th>Số điện thoại</th>
-                        <th>Địa chỉ</th>
+                        <th fieldName="EmployeeCode">Mã nhân viên</th>
+                        <th fieldName="EmployeeFullName">Họ và tên</th>
+                        <th fieldName="EmployeeGenderName">Giới tính</th>
+                        <th fieldName="EmployeeDateOfBirth" formatType="ddmmyyyy">Ngày sinh</th>
+                        <th fieldName="EmployeePhoneNumber">Số điện thoại</th>
+                        <th fieldName="EmployeeEmail">Email</th>
+                        <th fieldName="EmployeeEmail">Chức vụ</th>
+                        <th fieldName="EmployeeEmail">Phòng ban</th>
+                        <th fieldName="EmployeeEmail" formatType="Money ">Mức lương hiện tại</th>
+                        <th fieldName="EmployeeEmail">Địa chỉ</th>
+                        <th fieldName="EmployeeEmail">Tinh trạng công việc</th>
 
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
+                   <!-- <tr>
                         <td>NV00001</td>
                         <td>Trần thăng long</td>
-                        <td>14/11/2000</td>
                         <td>Nam</td>
+                        <td class="text-align-center">14/11/2000</td>
                         <td>0999999999</td>
-                        <td>Hưng Yêncsdhd dfhdjsfhs dfjdshfdjsfds fdshfdsjfhsdjf jsdfhdsjfhd </td>
+                        <td>thanglong2222@gmail.com</td>
+                        <td>Fresher Web</td>
+                        <td>Sản xuất</td>
+                        <td id="salary" class="text-align-right"></td>
+                        <td style="max-width:250px" title="Huwng yeen">Hưng Yêncsdhd dfhdjsfhs dfjdshfdjsfds fdshfdsjfhsdjf jsdfhdsjfhd </td>
+                        <td>Đang làm việc</td>
+
                     </tr>
                     <tr>
                         <td>NV00001</td>
                         <td>Trần thăng long</td>
-                        <td>14/11/2000</td>
                         <td>Nam</td>
+                        <td>14/11/2000</td>
                         <td>0999999999</td>
-                        <td>Hưng Yên</td>
+                        <td>thanglong2222@gmail.com</td>
+                        <td>Fresher Web</td>
+                        <td>Sản xuất</td>
+                        <td>2.000.000</td>
+                        <td style="max-width:250px">Hưng Yêncsdhd dfhdjsfhs dfjdshfdjsfds fdshfdsjfhsdjf jsdfhdsjfhd </td>
+                        <td>Đang làm việc</td>
+
                     </tr>
                     <tr>
                         <td>NV00001</td>
                         <td>Trần thăng long</td>
-                        <td>14/11/2000</td>
                         <td>Nam</td>
+                        <td>14/11/2000</td>
                         <td>0999999999</td>
-                        <td>Hưng Yên</td>
+                        <td>thanglong2222@gmail.com</td>
+                        <td>Fresher Web</td>
+                        <td>Sản xuất</td>
+                        <td>2.000.000</td>
+                        <td style="max-width:250px">Hưng Yêncsdhd dfhdjsfhs dfjdshfdjsfds fdshfdsjfhsdjf jsdfhdsjfhd </td>
+                        <td>Đang làm việc</td>
+
+                    </tr>
+
+                    <tr>
+                        <td>NV00001</td>
+                        <td>Trần thăng long</td>
+                        <td>Nam</td>
+                        <td>14/11/2000</td>
+                        <td>0999999999</td>
+                        <td>thanglong2222@gmail.com</td>
+                        <td>Fresher Web</td>
+                        <td>Sản xuất</td>
+                        <td>2.000.000</td>
+                        <td style="max-width:250px">Hưng Yêncsdhd dfhdjsfhs dfjdshfdjsfds fdshfdsjfhsdjf jsdfhdsjfhd </td>
+                        <td>Đang làm việc</td>
+
                     </tr>
                     <tr>
                         <td>NV00001</td>
                         <td>Trần thăng long</td>
-                        <td>14/11/2000</td>
                         <td>Nam</td>
+                        <td>14/11/2000</td>
                         <td>0999999999</td>
-                        <td>Hưng Yên</td>
+                        <td>thanglong2222@gmail.com</td>
+                        <td>Fresher Web</td>
+                        <td>Sản xuất</td>
+                        <td>2.000.000</td>
+                        <td style="max-width:250px">Hưng Yêncsdhd dfhdjsfhs dfjdshfdjsfds fdshfdsjfhsdjf jsdfhdsjfhd </td>
+                        <td>Đang làm việc</td>
+
                     </tr>
                     <tr>
                         <td>NV00001</td>
                         <td>Trần thăng long</td>
-                        <td>14/11/2000</td>
                         <td>Nam</td>
+                        <td>14/11/2000</td>
                         <td>0999999999</td>
-                        <td>Hưng Yên</td>
-                    </tr>
+                        <td>thanglong2222@gmail.com</td>
+                        <td>Fresher Web</td>
+                        <td>Sản xuất</td>
+                        <td>2.000.000</td>
+                        <td style="max-width:250px">Hưng Yêncsdhd dfhdjsfhs dfjdshfdjsfds fdshfdsjfhsdjf jsdfhdsjfhd </td>
+                        <td>Đang làm việc</td>
+
+                    </tr>-->
+
+
+
+
+
                 </tbody>
             </table>
         </div>
@@ -174,5 +231,66 @@
             <div class="row-limit">10 nhân viên/trang</div>
         </div>
     </div>
+    <div class="m-dialog dialog-detail">
+        <div class="dialog-modal"></div>
+        <div class="dialog-content">
+            <div class="dialog-header">
+                <div class="dialog-header-title">Thông tin nhân viên</div>
+                <div class="dialog-header-close">
+                    <button></button>
+                </div>
+            </div>
+            <div class="dialog-body">
+                Thông tin chung
+                <div class="m-row">
+                    <div class="m-label">Mã nhân viên(<span>*</span>)</div>
+                    <div>
+                        <input class="m-control" type="text" />
+                    </div>
+                </div>
+                <div class="m-row">
+                    <div class="m-label">Họ và tên(<span>*</span>)</div>
+                    <div>
+                        <input class="m-control" type="text" />
+                    </div>
+                </div>
+                <div class="m-row">
+                    <div class="m-label">Mã nhân viên</div>
+                    <div>
+                        <input class="m-control" type="text" />
+                    </div>
+                </div>
+                <div class="m-row">
+                    <div class="m-label">Mã nhân viên</div>
+                    <div>
+                        <input class="m-control" type="text" />
+                    </div>
+                </div>
+                <div class="m-row">
+                    <div class="m-label">Mã nhân viên</div>
+                    <div>
+                        <input class="m-control" type="text" />
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    <!--thứ tự nhúng jquery :jquery,common,js-->
+    <script src="/lib/jquery-3.6.0.min.js"></script>
+    <script src="/js/common/common.js"></script>
+    <script src="/js/common/base.js"></script>
+    <script src="/js/page/employee.js"></script>
+    <!--<script>
+        function formatMoney(money) {
+            var num = money.toFixed(1).replace(/\d(?=(\d{3})+\.)/g, "$&.");
+            return num;
+
+        }
+        var tien = "";
+        tien = formatMoney(2000000)
+        document.getElementById("salary").innerHTML = tien;
+    </script>-->
 </body>
 </html>
