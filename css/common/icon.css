@@ -9,4 +9,11 @@
     background-repeat:no-repeat;
     background-position:16px center;
 }
-
+.icon-save {
+    background-image: url('/content/icon/save.svg');
+    width: 16px;
+    height: 16px;
+    background-position:left;
+    background-repeat:no-repeat;
+    background-size:cover;
+}

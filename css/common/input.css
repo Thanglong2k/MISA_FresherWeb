@@ -3,10 +3,13 @@
     border-radius: 4px;
     outline: none;
     border: 1px solid #bbbbbb;
+    height:30px;
+    box-sizing:border-box;
 }
 input::placeholder{
     font-size:11px;
 }
 .input-search{
     padding-left:40px;
+    width:250px;
 }

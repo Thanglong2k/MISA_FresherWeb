@@ -9,7 +9,33 @@ a{
 }
 .m-row{
     margin-top:16px;
+    display:flex;
+    justify-content:space-between;
 }
 .m-label{
     margin-bottom:4px;
+}
+.form-item{
+    width:48%;
+}
+.m-control{
+    width:100%;
+    box-sizing:border-box;
+}
+.select {
+    padding: 0 16px;
+    border-radius: 4px;
+    outline: none;
+    border: 1px solid #bbbbbb;
+    height: 30px;
+    box-sizing: border-box;
+}
+.form-select {
+    padding: 0 16px;
+    border-radius: 4px;
+    outline: none;
+    border: 1px solid #bbbbbb;
+    height: 30px;
+    width:100%;
+    box-sizing: border-box;
 }
