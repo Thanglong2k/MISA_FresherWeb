@@ -9,6 +9,7 @@ class EmployeeJS extends BaseJS{
     constructor() {
         super();
         /*this.loadData();*/
+<<<<<<< HEAD
         /*this.open();
         this.close();*/
     }
@@ -16,12 +17,60 @@ class EmployeeJS extends BaseJS{
         this.getDataUrl = "http://api.manhnv.net/api/employees";
     }
     
+=======
+    }
+    /**
+     * Load dữ liệu
+     * Created by : TTLONG (1/7/2021)
+     * */
+    /*loadData() {
+    //lấy dữ liệu về
+    $.ajax({
+        url: "http://api.manhnv.net/api/employees",
+        method: "GET"
+    }).done(function (res) {//chạy ko có lỗi, res là data khi sử dụng postman nó trả về res
+        var data = res;
+
+
+        $.each(data, function (index, item) {
+            var dateOfBirth = item.DateOfBirth;
+            var salary = item.Salary;
+            dateOfBirth = formatDate();
+            salary = formatMoney(15000000);
+            var tr = $(`<tr>
+                            <td>`+ item.EmployeeCode + `</td>
+                            <td>`+ item.FullName + `</td>
+                            <td>`+ item.GenderName + `</td>
+                            <td class="text-align-center">`+ dateOfBirth + `</td>
+                            <td>`+ item.PhoneNumber + `</td>
+                            <td>`+ item.Email + `</td>
+                            <td>`+ item.PositionName + `</td>
+                            <td>`+ item.DepartmentName + `</td>
+                            <td class="text-align-right">`+ salary + `</td>
+                            <td style="max-width:250px" title="`+ item.Address + `">` + item.Address + `</td>
+                            <td>`+ item.WorkStateName + `</td>
+                            
+
+                        </tr >`);
+            $("tbody").append(tr);
+        })
+    }).fail(function (res) {//chạy có lỗi
+
+    })
+    //binding dữ liệu lên table
+
+} */
+>>>>>>> 5536ef4de6f8cd5baa8bbe638ab9998d2d22fca5
     /**
     * Thêm dữ liệu
     * Created by : TTLONG (2/7/2021)
     * */
     add() {
+<<<<<<< HEAD
         
+=======
+
+>>>>>>> 5536ef4de6f8cd5baa8bbe638ab9998d2d22fca5
     }
     /**
     * Sửa dữ liệu
@@ -37,6 +86,7 @@ class EmployeeJS extends BaseJS{
     delete() {
 
     }
+<<<<<<< HEAD
     /**
     * Mở dialog chi tiết nhân viên
     * Created by : TTLONG (4/7/2021)
@@ -55,5 +105,7 @@ class EmployeeJS extends BaseJS{
             $(".dialog-detail").hide();
         });
     }
+=======
+>>>>>>> 5536ef4de6f8cd5baa8bbe638ab9998d2d22fca5
 }
 

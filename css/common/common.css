@@ -3,6 +3,7 @@
 }
 .text-align-center {
     text-align: center;
+<<<<<<< HEAD
 }
 a{
     text-decoration:none;
@@ -38,4 +39,6 @@ a{
     height: 30px;
     width:100%;
     box-sizing: border-box;
+=======
+>>>>>>> 5536ef4de6f8cd5baa8bbe638ab9998d2d22fca5
 }
