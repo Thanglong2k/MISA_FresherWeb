@@ -1,0 +1,51 @@
+﻿.dropdown-list {
+    height: 40px;
+    width: 250px;
+    border: 1px solid #bbbbbb;
+    position: relative;
+    display: flex;
+    border-radius: 4px;
+    box-sizing:border-box;
+    margin-left:24px;
+}
+    .dropdown-list .dropdown-button-select {
+        width: 40px;
+        height: 100%;
+        border-left: 1px solid #bbbbbb;
+        background-image: url('../../content/icon/chevron-down.svg');
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 16px;
+        cursor: pointer;
+        padding: 0 12px;
+        box-sizing: border-box;
+    }
+    .dropdown-list .dropdown-button-select:hover {
+        background-color:red;
+    }
+    .dropdown-list .dropdown-list-box{
+        position:absolute;
+        width:100%;
+        box-sizing:border-box;
+        top:40px;
+        background-color:#ffffff;
+    }
+    .dropdown-list .item-list {
+        cursor:pointer;
+        height:40px;
+        align-items:center;
+        line-height:40px;
+        padding:0 16px;
+    }
+    .dropdown-list .item-list:hover {
+        background-color: #E9EBEE;
+    }
+    .dropdown-list .item-list:active {
+        background-color: #019160;
+        color:#000000;
+    }
+    .dropdown-list .dropdown-input-text{
+        border:none;
+        width:calc(100% - 40px);
+        height:100%;
+    }

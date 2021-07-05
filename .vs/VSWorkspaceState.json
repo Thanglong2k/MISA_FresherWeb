@@ -2,7 +2,8 @@
   "ExpandedNodes": [
     "",
     "\\content",
-    "\\content\\icon",
+    "\\css",
+    "\\css\\common",
     "\\page"
   ],
   "SelectedNode": "\\MISA_FresherWeb.sln",

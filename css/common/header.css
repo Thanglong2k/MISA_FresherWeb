@@ -1,13 +1,54 @@
 ﻿.header {
     float: left;
-    width: calc(100% - 221px);
+    width: 100%;
     height: 60px;
     border-bottom: 1px solid #e5e5e5;
     justify-content: space-between;
     display: flex;
     background-color: #FFFFFF;
-    padding: 12px 16px;
-    box-sizing:border-box;
+    
+}
+    .header .header-left {
+        width: 220px;
+        height: 100%;
+        border-right: 1px solid #dedede;
+       
+    }
+    .header-left .logo-site, .header-left .logo-box {
+        display: flex;
+        width: inherit;
+        height: 60px;
+        align-items:center;
+    }
+
+    .header-left .logo-box {
+        padding: 12px 16px;
+        box-sizing: border-box;
+    }
+    /*Logo page*/
+    .header-left .logo-site .logo-box .toggle-icon {
+        width: 24px;
+        height: 24px;
+        background-image: url('/content/img/toggle.png');
+        background-size: contain;
+        background-repeat: no-repeat;
+    }
+
+    .header-left .logo-site .logo-box .amis-logo {
+        margin-left: 10px;
+        width: calc(100% - 10px - 24px - 16px); /*10px: margin, 24px:icon, 16px:padding của logo-box*/
+        height: 24px;
+        background-image: url('/content/img/cukcuk-logo.png');
+        background-size: contain;
+        background-repeat: no-repeat;
+    }
+.header .header-right {
+    width: calc(100% - 221px);
+    height: 100%;
+    justify-content: space-between;
+    display: flex;
+    padding-right: 16px;
+    box-sizing: border-box;
 }
 .select-restaurent {
     border: none;

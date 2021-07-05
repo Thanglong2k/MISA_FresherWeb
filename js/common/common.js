@@ -19,15 +19,14 @@ function formatDate(date) {
  * Created by TTLONG (2/7/2021)
  */
 function formatMoney(money) {
-<<<<<<< HEAD
+
     if (money) {
         return money.toFixed(0).replace(/\d(?=(\d{3})+\.)/g, "$&,");
     }
     
-    return "";
-=======
+
     var num = money.toFixed(0).replace(/\d(?=(\d{3})+\.)/g, "$&,");
     return num;
->>>>>>> 5536ef4de6f8cd5baa8bbe638ab9998d2d22fca5
+
 
 }

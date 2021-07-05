@@ -3,8 +3,14 @@
     border-radius: 4px;
     outline: none;
     border: 1px solid #bbbbbb;
-    height:30px;
+    height:40px;
     box-sizing:border-box;
+}
+input:focus {
+   
+    border: 1px solid #019160;
+    font-size:13px;
+    color:#000000;
 }
 input::placeholder{
     font-size:11px;

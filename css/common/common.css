@@ -3,7 +3,6 @@
 }
 .text-align-center {
     text-align: center;
-<<<<<<< HEAD
 }
 a{
     text-decoration:none;
@@ -28,7 +27,7 @@ a{
     border-radius: 4px;
     outline: none;
     border: 1px solid #bbbbbb;
-    height: 30px;
+    height: 40px;
     box-sizing: border-box;
 }
 .form-select {
@@ -36,9 +35,8 @@ a{
     border-radius: 4px;
     outline: none;
     border: 1px solid #bbbbbb;
-    height: 30px;
+    height: 40px;
     width:100%;
     box-sizing: border-box;
-=======
->>>>>>> 5536ef4de6f8cd5baa8bbe638ab9998d2d22fca5
+
 }

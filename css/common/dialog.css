@@ -2,6 +2,9 @@
    /* position:relative;*/
    font-size:13px;
 }
+.m-dialog:focus{
+
+}
 .m-dialog .dialog-modal{
     opacity:0.5;
     position:fixed;
@@ -17,7 +20,7 @@
     .m-dialog .dialog-content {
         position: fixed;
         width: 800px;
-        height: 800px;
+        height: 700px;
         background-color: #ffffff;
         z-index: 10;
         top: calc(50% - 375px);
@@ -36,9 +39,10 @@
     .m-dialog .dialog-body {
         width: 100%;
         display: flex;
-        height: calc(100% - 61px - 61px - 50px);
+        height: calc(100% - 67px - 61px);
         padding: 0 24px;
         box-sizing:border-box;
+        margin-bottom:24px;
     }
         .m-dialog .dialog-body .dialog-body-left {
             width:160px;
@@ -48,6 +52,7 @@
             width: calc(100% - 160px);
             height: 100%;
             margin-left: 16px;
+            overflow-y:auto;
         }
     .m-dialog .dialog-footer {
         width: 100%;

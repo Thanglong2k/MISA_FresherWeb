@@ -9,16 +9,16 @@ class EmployeeJS extends BaseJS{
     constructor() {
         super();
         /*this.loadData();*/
-<<<<<<< HEAD
+
         /*this.open();
         this.close();*/
     }
     setDataUrl() {
-        this.getDataUrl = "http://api.manhnv.net/api/employees";
+        this.getDataUrl = "http://cukcuk.manhnv.net/v1/Employees";
     }
     
-=======
-    }
+
+    
     /**
      * Load dữ liệu
      * Created by : TTLONG (1/7/2021)
@@ -60,17 +60,16 @@ class EmployeeJS extends BaseJS{
     //binding dữ liệu lên table
 
 } */
->>>>>>> 5536ef4de6f8cd5baa8bbe638ab9998d2d22fca5
+
     /**
     * Thêm dữ liệu
     * Created by : TTLONG (2/7/2021)
     * */
     add() {
-<<<<<<< HEAD
-        
-=======
 
->>>>>>> 5536ef4de6f8cd5baa8bbe638ab9998d2d22fca5
+        
+
+
     }
     /**
     * Sửa dữ liệu
@@ -86,7 +85,7 @@ class EmployeeJS extends BaseJS{
     delete() {
 
     }
-<<<<<<< HEAD
+
     /**
     * Mở dialog chi tiết nhân viên
     * Created by : TTLONG (4/7/2021)
@@ -105,7 +104,6 @@ class EmployeeJS extends BaseJS{
             $(".dialog-detail").hide();
         });
     }
-=======
->>>>>>> 5536ef4de6f8cd5baa8bbe638ab9998d2d22fca5
+
 }
 
