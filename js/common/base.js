@@ -45,32 +45,31 @@ class BaseJS {
             
         })
         //filter select phòng ban:
-        $(".dropdown-department .dropdown-button-select").click(function () {
-            $(".dropdown-department .dropdown-list-box").toggle();
+        $("#dropdown-department .dropdown-button-select").click(function () {
+            $("#dropdown-department .dropdown-list-box").toggle();
         })
        
         //lấy giá trị của item được clickc trong dropdown-department:
-        $(".dropdown-department .item-list").click(function () {
+        $("#dropdown-department .item-list").click(function () {
             //lấy giá trị của item vừa chọn
             var text = $(this).text();
             //hiển thị giá trị lên input
-            $(".dropdown-department input").val(text);
+            $("#dropdown-department input").val(text);
             //ẩn danh sách chọn đi
-            $(".dropdown-department .dropdown-list-box").hide();
+            $("#dropdown-department .dropdown-list-box").hide();
         })
-        //filter select vị trí:
-        $(".dropdown-position .dropdown-button-select").click(function () {
-            $(".dropdown-position .dropdown-list-box").toggle();
-        })
-        //lấy giá trị của item được clickc trong dropdown-position:
-        $(".dropdown-position .item-list").click(function () {
-            //lấy giá trị của item vừa chọn
-            var text = $(this).text();
-            //hiển thị giá trị lên input
-            $(".dropdown-position input").val(text);
-            //ẩn danh sách chọn đi
-            $(".dropdown-position .dropdown-list-box").hide();
-        })
+        //select item dropdown
+        me.handleClickItemDropdown("#dropdown-department");
+        me.handleClickItemDropdown("#dropdown-position");
+       
+        //hide/show dropdown department
+        me.handleDropdown("#dropdown-department");
+        //hide/show dropdown position
+        me.handleDropdown("#dropdown-position");
+
+        //click outside object
+        me.handleClickOutSide("#dropdown-department");
+        me.handleClickOutSide("#dropdown-position");
         //ẩn form chi tiết khi nhấn hủy:
         $("#btnCancel").click(function () {
             //Ẩn dialog thông tin chi tiết:
@@ -89,15 +88,7 @@ class BaseJS {
             $(".dialog-detail").hide();
         })
     }
-    /**
-     * Hàm cho phép kéo thả, di chuyển form
-     * TTLONG 04/07/2021
-     */
-    draggable() {
-        
-
-        this.Form.draggable({ handle: ".dialog-head" });
-    }
+    
     /**
     * Hàm load dữ liệu dùng chung cho các trang
     * TTLONG 02/07/2021
@@ -109,12 +100,12 @@ class BaseJS {
             $("table tbody").empty();
 
             //lấy giá trị text của item department có attribute là row của dropdown vào inout
-            var textItem = $(".dropdown-department .dropdown-list-box .item-list").closest(".dropdown-department").find("[row]").text();
-            $(".dropdown-department input").val(textItem);
+            var textItem = $("#dropdown-department .dropdown-list-box .item-list").closest("#dropdown-department").find("[row]").text();
+            $("#dropdown-department input").val(textItem);
 
             //lấy giá trị text của item position có attribute là row của dropdown vào inout
-            var textItem = $(".dropdown-position .dropdown-list-box .item-list").closest(".dropdown-position").find("[row]").text();
-            $(".dropdown-position input").val(textItem);
+            var textItem = $("#dropdown-position .dropdown-list-box .item-list").closest("#dropdown-position").find("[row]").text();
+            $("#dropdown-position input").val(textItem);
 
             //lấy thông tin các cột dữ liệu
 
@@ -163,6 +154,66 @@ class BaseJS {
 
         }
 
-        
+    }
+    /**
+    * Hàm xử lý hide/show dropdown
+    * TTLONG 06/07/2021
+    * */
+    handleDropdown(id) {
+        // hide/show khi click select vị trí:
+        $(id + " .dropdown-button-select").click(function (e) {
+            if ($(this).attr("hide") == "true") {
+                $(this).attr("hide", "false");
+                $(id + " .dropdown-list-box").show();
+                $(this).css("background-image", "url('../../content/icon/chevron-up.svg')");
+            }
+            else {
+                $(this).attr("hide", "true");
+                $(id + " .dropdown-list-box").hide();
+                $(this).css("background-image", "url('../../content/icon/chevron-down.svg')");
+            }
+            e.stopPropagation();
+
+        })
+    }
+    /**
+    * Hàm xử lý click vào item trong dropdown
+    * TTLONG 06/07/2021
+    * */
+    handleClickItemDropdown(id) {
+        //lấy giá trị của item được clickc trong dropdown-position:
+        $(id+" .item-list").click(function () {
+            //lấy giá trị của item vừa chọn
+            var text = $(this).text();
+            //hiển thị giá trị lên input
+            $(id+" input").val(text);
+            //ẩn danh sách chọn đi
+            $(id+" .dropdown-list-box").hide();
+        })
+    }
+    /**
+    * Hàm xử lý click outside dropdown select
+    * TTLONG 06/07/2021
+    * */
+    handleClickOutSide(id) {
+        //xử lý khi click outside của đối tượng:
+        $(document).click(function () {
+            $(id+" .dropdown-list-box").hide();
+            $(id+" .dropdown-button-select").attr("hide", "true");
+            $(id+" .dropdown-button-select").css("background-image", "url('../../content/icon/chevron-down.svg')");
+        });
+        /*$(document).click(function (evt) {
+            var target = evt.target.className;
+            var inside = $(id+" .dropdown-list-box");
+            *//*alert($(target).html());*//*
+            if ($.trim(target) != '') {
+                if ($("." + target) != inside) {
+                    $(id +" .dropdown-button-select").attr("hide", "true");
+                    $(id +" .dropdown-list-box").hide();
+                    $(id +" .dropdown-button-select").css("background-image", "url('../../content/icon/chevron-down.svg')");
+                }
+            }
+        });*/
+     
     }
 }

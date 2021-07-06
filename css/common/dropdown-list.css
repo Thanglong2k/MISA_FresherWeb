@@ -21,7 +21,7 @@
         box-sizing: border-box;
     }
     .dropdown-list .dropdown-button-select:hover {
-        background-color:red;
+        background-color:#bbbbbb;
     }
     .dropdown-list .dropdown-list-box{
         position:absolute;
@@ -29,6 +29,7 @@
         box-sizing:border-box;
         top:40px;
         background-color:#ffffff;
+        box-shadow:1px 1px 10px #bbbbbb;
     }
     .dropdown-list .item-list {
         cursor:pointer;

@@ -108,9 +108,9 @@
                     <option>Phòng đào tạo</option>
                     <option>phòng sản xuất</option>
                 </select>-->
-                <div class="dropdown-list dropdown-department">
+                <div class="dropdown-list" id="dropdown-department">
                     <input type="text" class="dropdown-input-text" />
-                    <div class="dropdown-button-select"></div>
+                    <div class="dropdown-button-select" hide=true></div>
                     <div class="dropdown-list-box" style="display:none;">
                         <div class="item-list" row>Tất cả phòng ban</div>
                         <div class="item-list">Sản xuất</div>
@@ -123,9 +123,10 @@
                     <option>FresherWeb</option>
                     <option>Intern HR</option>
                 </select>-->
-                <div class="dropdown-list dropdown-position">
+                <div class="dropdown-list" id="dropdown-position">
                     <input type="text" class="dropdown-input-text" />
-                    <div class="dropdown-button-select"></div>
+                    <div class="dropdown-button-select" hide=true></div>
+                    
                     <div class="dropdown-list-box" style="display:none;">
                         <div class="item-list" row>Tất cả vị trí</div>
                         <div class="item-list">Fresher Web</div>
@@ -438,12 +439,16 @@
                                 </div>
                                 <div class="form-item">
                                     <div class="m-label">Giới tính</div>
-                                    <div>
-                                        <select class="form-select" FieldName="Gender">
-                                            <option value="0">Nữ</option>
-                                            <option value="1" selected>Nam</option>
-                                            <option value="2">Khác</option>
-                                        </select>
+                                    <div class="dropdown-list  dropdown-form" id="dropdown-gender">
+                                        <input type="text" class="dropdown-input-text" />
+                                        <div class="dropdown-button-select" hide=true></div>
+
+                                        <div class="dropdown-list-box" style="display:none;">
+                                            <div class="item-list" row>Nam</div>
+                                            <div class="item-list">Nữ</div>
+                                            <div class="item-list">Khác</div>
+
+                                        </div>
                                     </div>
                                 </div>
 
@@ -499,22 +504,30 @@
                             <div class="m-row">
                                 <div class="form-item">
                                     <div class="m-label">Vị trí</div>
-                                    <div>
-                                        <select class="form-select" FieldName="Position">
-                                            <option value="0">Nhân viên</option>
-                                            <option value="1" selected>Giám đốc</option>
-                                            <option value="2">Khác</option>
-                                        </select>
+                                    <div class="dropdown-list  dropdown-form" id="dropdown-form-position">
+                                        <input type="text" class="dropdown-input-text" />
+                                        <div class="dropdown-button-select" hide=true></div>
+
+                                        <div class="dropdown-list-box" style="display:none;">
+                                            <div class="item-list" row>FresherWeb</div>
+                                            <div class="item-list">NCCN</div>
+                                            <div class="item-list">Khác</div>
+
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="form-item">
                                     <div class="m-label">Phòng ban</div>
-                                    <div>
-                                        <select class="form-select" FieldName="Department">
-                                            <option value="0">Phòng sản xuất</option>
-                                            <option value="1" selected>Phòng nhân sự</option>
-                                            <option value="2">Khác</option>
-                                        </select>
+                                    <div class="dropdown-list  dropdown-form" id="dropdown-form-department">
+                                        <input type="text" class="dropdown-input-text" />
+                                        <div class="dropdown-button-select" hide=true></div>
+
+                                        <div class="dropdown-list-box" style="display:none;">
+                                            <div class="item-list" row>Phòng nhân sự</div>
+                                            <div class="item-list">phòng sản xuất</div>
+                                            <div class="item-list">Khác</div>
+
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -541,12 +554,16 @@
                                 </div>
                                 <div class="form-item">
                                     <div class="m-label">Tình trạng công việc</div>
-                                    <div>
-                                        <select class="form-select" FieldName="Status">
-                                            <option value="0">Đã nghỉ</option>
-                                            <option value="1" selected>Đang làm việc</option>
-                                            <option value="2">Khác</option>
-                                        </select>
+                                    <div class="dropdown-list  dropdown-form" id="dropdown-form-workstatus">
+                                        <input type="text" class="dropdown-input-text" />
+                                        <div class="dropdown-button-select" hide=true></div>
+
+                                        <div class="dropdown-list-box" style="display:none;">
+                                            <div class="item-list" row>Đang làm việc</div>
+                                            <div class="item-list">Đã nghỉ làm</div>
+                                            <div class="item-list">Khác</div>
+
+                                        </div>
                                     </div>
                                 </div>
                             </div>
