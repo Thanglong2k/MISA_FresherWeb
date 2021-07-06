@@ -19,3 +19,6 @@ input::placeholder{
     padding-left:40px;
     width:250px;
 }
+input.border-red{
+    border:1px solid #ff0000;
+}

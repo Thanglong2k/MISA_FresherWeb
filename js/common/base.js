@@ -38,39 +38,40 @@ class BaseJS {
             $(".dialog-detail").show();
             //xóa tất cả background color của những tr khác:
  
-            let trSiblings = $(this).siblings();//lấy tất cả tr đồng cấp
-            $(trSiblings).css("background-color", "none")
+            /*let trSiblings = $(this).siblings();//lấy tất cả tr đồng cấp
+            $(trSiblings).css("background-color", "transparent")*/
+            $("tr:nth-child(even)").css("background-color", "#F5F5F5");
+            $("tr:nth-child(odd)").css("background-color", "transparent");
             //highlight row vừa chọn -> thay đổi background của tr đang click:
             $(this).css("background", "#8ec252");
             
         })
-        //filter select phòng ban:
-        $(".dropdown-department .dropdown-button-select").click(function () {
-            $(".dropdown-department .dropdown-list-box").toggle();
-        })
+        /*//filter select phòng ban:
+        $("#dropdown-department .dropdown-button-select").click(function () {
+            $("#dropdown-department .dropdown-list-box").toggle();
+        })*/
        
-        //lấy giá trị của item được clickc trong dropdown-department:
-        $(".dropdown-department .item-list").click(function () {
+        /*//lấy giá trị của item được click trong dropdown-department:
+        $("#dropdown-department .item-list").click(function () {
             //lấy giá trị của item vừa chọn
             var text = $(this).text();
             //hiển thị giá trị lên input
-            $(".dropdown-department input").val(text);
+            $("#dropdown-department input").val(text);
             //ẩn danh sách chọn đi
-            $(".dropdown-department .dropdown-list-box").hide();
-        })
-        //filter select vị trí:
-        $(".dropdown-position .dropdown-button-select").click(function () {
-            $(".dropdown-position .dropdown-list-box").toggle();
-        })
-        //lấy giá trị của item được clickc trong dropdown-position:
-        $(".dropdown-position .item-list").click(function () {
-            //lấy giá trị của item vừa chọn
-            var text = $(this).text();
-            //hiển thị giá trị lên input
-            $(".dropdown-position input").val(text);
-            //ẩn danh sách chọn đi
-            $(".dropdown-position .dropdown-list-box").hide();
-        })
+            $("#dropdown-department .dropdown-list-box").hide();
+        })*/
+        //select item dropdown
+        me.handleClickItemDropdown("#dropdown-department");
+        me.handleClickItemDropdown("#dropdown-position");
+       
+        //hide/show dropdown department
+        me.handleDropdown("#dropdown-department");
+        //hide/show dropdown position
+        me.handleDropdown("#dropdown-position");
+        me.handleDropdown("#dropdown-restaurent");
+        //click outside object
+        me.handleClickOutSide("#dropdown-department");
+        me.handleClickOutSide("#dropdown-position");
         //ẩn form chi tiết khi nhấn hủy:
         $("#btnCancel").click(function () {
             //Ẩn dialog thông tin chi tiết:
@@ -79,28 +80,69 @@ class BaseJS {
         //thực hiện lưu dữ liệu khi nhấn button "Lưu" trên form:
         $("#btnSave").click(function () {
             //validate dữ liệu:
-
-            //thu thập thông tin dữ liệu đưuọc nhập - >build thành object:
-
+            var inputValidates = $('input[required],input[type="email"]');
+            $.each(inputValidates, function (index, input) {
+                var value = $(input).val();
+                $(input).trigger('blur');
+            })
+            var inputNotValids = $('input[validate="false"]');
+            if (inputNotValids && inputNotValids.length > 0) {
+                alert("Dữ liệu không hợp lệ vui lòng kiểm tra lại");
+                inputNotValids[0].focus();//focus vào ô nhập lỗi đầu tiên
+                return;
+            }
+            //thu thập thông tin dữ liệu được nhập - >build thành object:
+            var employee = {};
+            var inputs = $('input[fieldName]');
+            $.each(inputs, function (index,input) {
+                var propertyName = $(this).attr('fieldName');
+                var value = $(this).val();
+                employee[propertyName]=value;
+            })
+            
+            /*var employee = {
+                EmployeeCode: $("#txtEmployeeCode").val(),
+                FullName: $("#txtFullName").val(),
+                DateOfBirth: $("#dtDateOfBirth").val(),
+                GenderName: $("#drpGender").val(),
+                IdentityNumber: $("#txtIdentityNumber").val(),
+                IdentityDate: $("#dtIdentityDate").val(),
+                IdentityPlace: $("#txtIdentityPlace").val(),
+                Email: $("#txtEmail").val(),
+                PhoneNumber: $("#txtPhoneNumber").val(),
+                PositionName: $("#drpPosition").val(),
+                DepartmentName: $("#drpDepartment").val(),
+                PersonalTaxCode: $("#txtPersonalTaxCode").val(),
+                Salary: $("#txtSalary").val(),
+                JoinDate: $("#dtJoinDate").val(),
+                WorkStatus: $("#txtWorkStatus").val(),
+            }*/
+            
             //gọi service tương ứng thực hiện lưu trữ dữ liệu:
-
-            //sau khi lưu thành công -> đưa ra thông báo cho người dùng, ẩn form chi tiết, load lại dữ liệu:
-
-            $(".dialog-detail").hide();
+            $.ajax({
+                url: 'http://cukcuk.manhnv.net/v1/Employees',
+                method: 'POST',
+                data: JSON.stringify(employee),
+               /* crossDomain: true,
+                dataType:'jsonp',//giải quyết được tình trạng tên miền chéo*/
+                contentType:'application/json'
+            }).done(function (res) {
+                //sau khi lưu thành công -> đưa ra thông báo cho người dùng, ẩn form chi tiết, load lại dữ liệu:
+                alert("Thêm thành công!");
+                me.loadData();
+                $(".dialog-detail").hide();
+                debugger;
+            }).fail(function (res) {
+                debugger;
+            })
+            
         })
+        me.handleValidate();
     }
-    /**
-     * Hàm cho phép kéo thả, di chuyển form
-     * TTLONG 04/07/2021
-     */
-    draggable() {
-        
-
-        this.Form.draggable({ handle: ".dialog-head" });
-    }
+    
     /**
     * Hàm load dữ liệu dùng chung cho các trang
-    * TTLONG 02/07/2021
+    * Create by: TTLONG 02/07/2021
     * */
     loadData() {
 
@@ -109,12 +151,12 @@ class BaseJS {
             $("table tbody").empty();
 
             //lấy giá trị text của item department có attribute là row của dropdown vào inout
-            var textItem = $(".dropdown-department .dropdown-list-box .item-list").closest(".dropdown-department").find("[row]").text();
-            $(".dropdown-department input").val(textItem);
+            var textItem = $("#dropdown-department .dropdown-list-box .item-list").closest("#dropdown-department").find("[row]").text();
+            $("#dropdown-department input").val(textItem);
 
             //lấy giá trị text của item position có attribute là row của dropdown vào inout
-            var textItem = $(".dropdown-position .dropdown-list-box .item-list").closest(".dropdown-position").find("[row]").text();
-            $(".dropdown-position input").val(textItem);
+            var textItem = $("#dropdown-position .dropdown-list-box .item-list").closest("#dropdown-position").find("[row]").text();
+            $("#dropdown-position input").val(textItem);
 
             //lấy thông tin các cột dữ liệu
 
@@ -163,6 +205,125 @@ class BaseJS {
 
         }
 
+    }
+    /**
+    * Hàm xử lý hide/show dropdown
+    * Create by: TTLONG 06/07/2021
+    * */
+    handleDropdown(id) {
+        // hide/show khi click select vị trí:
+        $(id + " .dropdown-button-select").click(function (e) {
+            if ($(this).attr("hide") == "true") {
+                $(this).attr("hide", "false");
+                $(id + " .dropdown-list-box").show();
+                $(this).css("background-image", "url('../../content/icon/chevron-up.svg')");
+            }
+            else {
+                $(this).attr("hide", "true");
+                $(id + " .dropdown-list-box").hide();
+                $(this).css("background-image", "url('../../content/icon/chevron-down.svg')");
+            }
+            e.stopPropagation();
+
+        })
+    }
+    /**
+    * Hàm xử lý click vào item trong dropdown
+    * Create by: TTLONG 06/07/2021
+    * */
+    handleClickItemDropdown(id) {
+        //lấy giá trị của item được clickc trong dropdown-position:
+        $(id+" .item-list").click(function () {
+            //lấy giá trị của item vừa chọn
+            var text = $(this).attr("value");
+          
+            //hiển thị giá trị lên input
+            $(id+" input").val(text);
+            //ẩn danh sách chọn đi
+            $(id+" .dropdown-list-box").hide();
+        })
+    }
+    /**
+    * Hàm xử lý click outside dropdown select
+    * Create by: TTLONG 06/07/2021
+    * */
+    handleClickOutSide(id) {
+        //xử lý khi click outside của đối tượng:
+        $(document).click(function () {
+            $(id+" .dropdown-list-box").hide();
+            $(id+" .dropdown-button-select").attr("hide", "true");
+            $(id+" .dropdown-button-select").css("background-image", "url('../../content/icon/chevron-down.svg')");
+        });
+        /*$(document).click(function (evt) {
+            var target = evt.target.className;
+            var inside = $(id+" .dropdown-list-box");
+            *//*alert($(target).html());*//*
+            if ($.trim(target) != '') {
+                if ($("." + target) != inside) {
+                    $(id +" .dropdown-button-select").attr("hide", "true");
+                    $(id +" .dropdown-list-box").hide();
+                    $(id +" .dropdown-button-select").css("background-image", "url('../../content/icon/chevron-down.svg')");
+                }
+            }
+        });*/
+     
+    }
+    /**
+    * Hàm check validate bắt buộc nhập
+    * Create by: TTLONG 06/07/2021
+    * */
+    handleInputValidate(id) {
+        $("input[required]").blur(function () {
+            //kiểm tra dữ liệu đã nhập , nếu để trống thì cảnh báo:
+            
+            let value = $(this).val();
+            if (!value) {
+                $(this).addClass("border-red");
+                $(this).attr("title", "Trường này không được phép để trống.");
+                $(this).attr("validate", false);
+            }
+            else {
+                $(this).removeClass("border-red");
+                $(this).attr("validate", true);
+            }
+            
+        })
         
+    }
+    /**
+     * Hàm check email hợp lệ
+     * Create by: TTLONG 06/07/2021
+     * */
+    handleEmailValidate() {  
+        $("input[type='email']").blur(function () {
+            var email = $(this).val();
+            if ($(this).val()) {
+                let regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+                if (!regex.test(email)) {
+                    $(this).addClass("border-red");
+                    $(this).attr("title", "Bạn đã nhập sai định dạng email");
+                    $(this).attr("validate", false);
+                } else {
+                    $(this).removeClass("border-red");
+                    $(this).attr("validate", true);
+                }
+            }
+            
+        })
+        
+        
+    }
+    /**
+     * Hàm tập hợp các Validate
+     * Create by: TTLONG 06/07/2021
+     * */
+    handleValidate() {
+        this.handleInputValidate("#txtEmployeeCode");
+        
+        this.handleEmailValidate();
+        /*this.handleInputValidate("#txtFullName");
+        this.handleInputValidate("#txtIdentityCard");
+        this.handleInputValidate("#txtCardIssuer");
+        this.handleInputValidate("#txtEmail");*/
     }
 }

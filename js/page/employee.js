@@ -12,12 +12,15 @@ class EmployeeJS extends BaseJS{
 
         /*this.open();
         this.close();*/
+        this.handleEvents();
+        this.handleClickItemFormDropdown();
+        this.handleClickOutsideItemForm();
     }
     setDataUrl() {
         this.getDataUrl = "http://cukcuk.manhnv.net/v1/Employees";
     }
-    
 
+    
     
     /**
      * Load dữ liệu
@@ -104,6 +107,27 @@ class EmployeeJS extends BaseJS{
             $(".dialog-detail").hide();
         });
     }
-
+    /**
+    * hide/show dropdown
+    * Created by : TTLONG (4/7/2021)
+    * */
+    handleEvents() {
+        this.handleDropdown("#dropdown-gender");
+        this.handleDropdown("#dropdown-form-department");
+        this.handleDropdown("#dropdown-form-position");
+        this.handleDropdown("#dropdown-form-workstatus");
+    }
+    handleClickItemFormDropdown() {
+        this.handleClickItemDropdown("#dropdown-gender");
+        this.handleClickItemDropdown("#dropdown-form-department");
+        this.handleClickItemDropdown("#dropdown-form-position");
+        this.handleClickItemDropdown("#dropdown-form-workstatus");
+    }
+    handleClickOutsideItemForm() {
+        this.handleClickOutSide("#dropdown-gender");
+        this.handleClickOutSide("#dropdown-form-department");
+        this.handleClickOutSide("#dropdown-form-position");
+        this.handleClickOutSide("#dropdown-form-workstatus");
+    }
 }
 
