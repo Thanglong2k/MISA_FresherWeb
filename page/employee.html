@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <title></title>
+    <link rel="shortcut icon" href="#" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="/css/common/main.css" rel="stylesheet" />
     <link href="/css/common/header.css" rel="stylesheet" />
@@ -31,12 +32,23 @@
         <div class="header-right">
             <div class="header_region">
                 <!--<div class="region_dropdown">Nhà hàng Biển Đông</div>
-        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
-            <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
-        </svg>-->
-                <select class="select-restaurent">
+                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
+                </svg>-->
+                            <!--<select class="select-restaurent">
                     <option>Nhà hàng Biển Đông</option>
-                </select>
+                </select>-->
+                <div class="dropdown-list" id="dropdown-restaurent ">
+                    <input type="text" class="dropdown-input-text" />
+                    <div class="dropdown-button-select" hide=true></div>
+
+                    <div class="dropdown-list-box" style="display:none;">
+                        <div class="item-list" row>Nhà hàng Biển Đông</div>
+                        <div class="item-list">Fresher Web</div>
+                        <div class="item-list">NCCN</div>
+
+                    </div>
+                </div>
             </div>
             <!-- header right -->
             <div class="account_info">
@@ -420,13 +432,13 @@
                                 <div class="form-item">
                                     <div class="m-label">Mã nhân viên (<span class="required">*</span>)</div>
                                     <div>
-                                        <input class="m-control" id="txtEmployeeCode" type="text" required />
+                                        <input class="m-control" id="txtEmployeeCode" fieldName="EmployeeCode" type="text" required />
                                     </div>
                                 </div>
                                 <div class="form-item">
                                     <div class="m-label">Họ và tên (<span class="required">*</span>)</div>
                                     <div>
-                                        <input class="m-control" id="txtFullName" type="text" required/>
+                                        <input class="m-control" id="txtFullName" fieldName="FullName" type="text" required/>
                                     </div>
                                 </div>
                             </div>
@@ -434,19 +446,19 @@
                                 <div class="form-item">
                                     <div class="m-label">Ngày sinh</div>
                                     <div>
-                                        <input class="m-control" id="dtDateOfBirth" type="date" />
+                                        <input class="m-control" id="dtDateOfBirth"  fieldName="DateOfBirth" type="date" />
                                     </div>
                                 </div>
                                 <div class="form-item">
                                     <div class="m-label">Giới tính</div>
                                     <div class="dropdown-list  dropdown-form" id="dropdown-gender">
-                                        <input type="text" class="dropdown-input-text" />
+                                        <input type="text" id="drpGender" fieldName="Gender" class="dropdown-input-text" />
                                         <div class="dropdown-button-select" hide=true></div>
 
                                         <div class="dropdown-list-box" style="display:none;">
-                                            <div class="item-list" row>Nam</div>
-                                            <div class="item-list">Nữ</div>
-                                            <div class="item-list">Khác</div>
+                                            <div class="item-list" value="0" row>Nam</div>
+                                            <div class="item-list" value="1">Nữ</div>
+                                            <div class="item-list" value="2">Khác</div>
 
                                         </div>
                                     </div>
@@ -458,13 +470,13 @@
                                 <div class="form-item">
                                     <div class="m-label">Số CMTND/Căn cước (<span class="required">*</span>)</div>
                                     <div>
-                                        <input class="m-control" id="txtIdentityCard" type="text" required/>
+                                        <input class="m-control" id="txtIdentityNumber"  fieldName="IdentityNumber" type="text" required/>
                                     </div>
                                 </div>
                                 <div class="form-item">
                                     <div class="m-label">Ngày cấp</div>
                                     <div>
-                                        <input class="m-control" type="date" />
+                                        <input class="m-control" id="dtIdentityDate"  fieldName="IdentityDate" type="date" />
                                     </div>
                                 </div>
 
@@ -473,7 +485,7 @@
                                 <div class="form-item">
                                     <div class="m-label">Nơi cấp</div>
                                     <div>
-                                        <input class="m-control" id="txtCardIssuer" type="text" />
+                                        <input class="m-control" id="txtIdentityPlace"  fieldName="IdentityPlace" type="text" />
                                     </div>
                                 </div>
                                 <div class="form-item"></div>
@@ -483,13 +495,13 @@
                                 <div class="form-item">
                                     <div class="m-label">Email (<span class="required">*</span>)</div>
                                     <div>
-                                        <input class="m-control" id="txtEmail" type="email" required/>
+                                        <input class="m-control" id="txtEmail"  fieldName="Email" type="email" placeholder="example123@gmail.com" required/>
                                     </div>
                                 </div>
                                 <div class="form-item">
                                     <div class="m-label">Số điện thoại (<span class="required">*</span>)</div>
                                     <div>
-                                        <input class="m-control" type="number" required/>
+                                        <input class="m-control" id="txtPhoneNumber"  fieldName="PhoneNumber" type="number" required/>
                                     </div>
                                 </div>
                             </div>
@@ -505,7 +517,7 @@
                                 <div class="form-item">
                                     <div class="m-label">Vị trí</div>
                                     <div class="dropdown-list  dropdown-form" id="dropdown-form-position">
-                                        <input type="text" class="dropdown-input-text" />
+                                        <input type="text" id="drpPosition"  fieldName="PositionId" class="dropdown-input-text" />
                                         <div class="dropdown-button-select" hide=true></div>
 
                                         <div class="dropdown-list-box" style="display:none;">
@@ -518,8 +530,8 @@
                                 </div>
                                 <div class="form-item">
                                     <div class="m-label">Phòng ban</div>
-                                    <div class="dropdown-list  dropdown-form" id="dropdown-form-department">
-                                        <input type="text" class="dropdown-input-text" />
+                                    <div class="dropdown-list dropdown-form" id="dropdown-form-department">
+                                        <input type="text" id="drpDepartment" fieldName="DepartmentId" class="dropdown-input-text" />
                                         <div class="dropdown-button-select" hide=true></div>
 
                                         <div class="dropdown-list-box" style="display:none;">
@@ -535,13 +547,13 @@
                                 <div class="form-item">
                                     <div class="m-label">Mã số thuế cá nhân</div>
                                     <div>
-                                        <input class="m-control" type="text" />
+                                        <input class="m-control" id="txtPersonalTaxCode" fieldName="PersonalTaxCode" type="text" />
                                     </div>
                                 </div>
                                 <div class="form-item">
                                     <div class="m-label">Mức lương cơ bản</div>
                                     <div>
-                                        <input class="m-control" type="text" />
+                                        <input class="m-control" id="txtSalary" fieldName="Salary" type="text" />
                                     </div>
                                 </div>
                             </div>
@@ -549,13 +561,13 @@
                                 <div class="form-item">
                                     <div class="m-label">Ngày gia nhập công ty</div>
                                     <div>
-                                        <input class="m-control" type="date" />
+                                        <input class="m-control" id="dtJoinDate" fieldName="JoinDate" type="date" />
                                     </div>
                                 </div>
                                 <div class="form-item">
                                     <div class="m-label">Tình trạng công việc</div>
                                     <div class="dropdown-list  dropdown-form" id="dropdown-form-workstatus">
-                                        <input type="text" class="dropdown-input-text" />
+                                        <input type="text" id="txtWorkStatus" fieldName="WorkStatus" class="dropdown-input-text" />
                                         <div class="dropdown-button-select" hide=true></div>
 
                                         <div class="dropdown-list-box" style="display:none;">

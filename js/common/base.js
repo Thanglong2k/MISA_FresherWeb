@@ -41,6 +41,7 @@ class BaseJS {
             /*let trSiblings = $(this).siblings();//lấy tất cả tr đồng cấp
             $(trSiblings).css("background-color", "transparent")*/
             $("tr:nth-child(even)").css("background-color", "#F5F5F5");
+            $("tr:nth-child(odd)").css("background-color", "transparent");
             //highlight row vừa chọn -> thay đổi background của tr đang click:
             $(this).css("background", "#8ec252");
             
@@ -67,7 +68,7 @@ class BaseJS {
         me.handleDropdown("#dropdown-department");
         //hide/show dropdown position
         me.handleDropdown("#dropdown-position");
-
+        me.handleDropdown("#dropdown-restaurent");
         //click outside object
         me.handleClickOutSide("#dropdown-department");
         me.handleClickOutSide("#dropdown-position");
@@ -79,14 +80,63 @@ class BaseJS {
         //thực hiện lưu dữ liệu khi nhấn button "Lưu" trên form:
         $("#btnSave").click(function () {
             //validate dữ liệu:
-
-            //thu thập thông tin dữ liệu đưuọc nhập - >build thành object:
-
+            var inputValidates = $('input[required],input[type="email"]');
+            $.each(inputValidates, function (index, input) {
+                var value = $(input).val();
+                $(input).trigger('blur');
+            })
+            var inputNotValids = $('input[validate="false"]');
+            if (inputNotValids && inputNotValids.length > 0) {
+                alert("Dữ liệu không hợp lệ vui lòng kiểm tra lại");
+                inputNotValids[0].focus();//focus vào ô nhập lỗi đầu tiên
+                return;
+            }
+            //thu thập thông tin dữ liệu được nhập - >build thành object:
+            var employee = {};
+            var inputs = $('input[fieldName]');
+            $.each(inputs, function (index,input) {
+                var propertyName = $(this).attr('fieldName');
+                var value = $(this).val();
+                employee[propertyName]=value;
+            })
+            console.log(employee);
+            return;
+            var employee = {
+                EmployeeCode: $("#txtEmployeeCode").val(),
+                FullName: $("#txtFullName").val(),
+                DateOfBirth: $("#dtDateOfBirth").val(),
+                GenderName: $("#drpGender").val(),
+                IdentityNumber: $("#txtIdentityNumber").val(),
+                IdentityDate: $("#dtIdentityDate").val(),
+                IdentityPlace: $("#txtIdentityPlace").val(),
+                Email: $("#txtEmail").val(),
+                PhoneNumber: $("#txtPhoneNumber").val(),
+                PositionName: $("#drpPosition").val(),
+                DepartmentName: $("#drpDepartment").val(),
+                PersonalTaxCode: $("#txtPersonalTaxCode").val(),
+                Salary: $("#txtSalary").val(),
+                JoinDate: $("#dtJoinDate").val(),
+                WorkStatus: $("#txtWorkStatus").val(),
+            }
+            
             //gọi service tương ứng thực hiện lưu trữ dữ liệu:
-
-            //sau khi lưu thành công -> đưa ra thông báo cho người dùng, ẩn form chi tiết, load lại dữ liệu:
-
-            $(".dialog-detail").hide();
+            $.ajax({
+                url: 'http://cukcuk.manhnv.net/v1/Employees',
+                method: 'POST',
+                data: JSON.stringify(employee),
+               /* crossDomain: true,
+                dataType:'jsonp',//giải quyết được tình trạng tên miền chéo*/
+                contentType:'application/json'
+            }).done(function (res) {
+                //sau khi lưu thành công -> đưa ra thông báo cho người dùng, ẩn form chi tiết, load lại dữ liệu:
+                alert("Thêm thành công!");
+                me.loadData();
+                $(".dialog-detail").hide();
+                debugger;
+            }).fail(function (res) {
+                debugger;
+            })
+            
         })
         me.handleValidate();
     }
@@ -186,7 +236,7 @@ class BaseJS {
         //lấy giá trị của item được clickc trong dropdown-position:
         $(id+" .item-list").click(function () {
             //lấy giá trị của item vừa chọn
-            var text = $(this).text();
+            var text = $(this).attr("value");
             //hiển thị giá trị lên input
             $(id+" input").val(text);
             //ẩn danh sách chọn đi
@@ -230,14 +280,20 @@ class BaseJS {
             if (!value) {
                 $(this).addClass("border-red");
                 $(this).attr("title", "Trường này không được phép để trống.");
+                $(this).attr("validate", false);
             }
             else {
                 $(this).removeClass("border-red");
+                $(this).attr("validate", true);
             }
             
         })
         
     }
+    /**
+     * Hàm check email hợp lệ
+     * Create by: TTLONG 06/07/2021
+     * */
     handleEmailValidate() {  
         $("input[type='email']").blur(function () {
             var email = $(this).val();
@@ -246,8 +302,10 @@ class BaseJS {
                 if (!regex.test(email)) {
                     $(this).addClass("border-red");
                     $(this).attr("title", "Bạn đã nhập sai định dạng email");
+                    $(this).attr("validate", false);
                 } else {
                     $(this).removeClass("border-red");
+                    $(this).attr("validate", true);
                 }
             }
             
