@@ -38,8 +38,9 @@ class BaseJS {
             $(".dialog-detail").show();
             //xóa tất cả background color của những tr khác:
  
-            let trSiblings = $(this).siblings();//lấy tất cả tr đồng cấp
-            $(trSiblings).css("background-color", "none")
+            /*let trSiblings = $(this).siblings();//lấy tất cả tr đồng cấp
+            $(trSiblings).css("background-color", "transparent")*/
+            $("tr:nth-child(even)").css("background-color", "#F5F5F5");
             //highlight row vừa chọn -> thay đổi background của tr đang click:
             $(this).css("background", "#8ec252");
             
@@ -87,11 +88,12 @@ class BaseJS {
 
             $(".dialog-detail").hide();
         })
+        me.handleValidate();
     }
     
     /**
     * Hàm load dữ liệu dùng chung cho các trang
-    * TTLONG 02/07/2021
+    * Create by: TTLONG 02/07/2021
     * */
     loadData() {
 
@@ -157,7 +159,7 @@ class BaseJS {
     }
     /**
     * Hàm xử lý hide/show dropdown
-    * TTLONG 06/07/2021
+    * Create by: TTLONG 06/07/2021
     * */
     handleDropdown(id) {
         // hide/show khi click select vị trí:
@@ -178,7 +180,7 @@ class BaseJS {
     }
     /**
     * Hàm xử lý click vào item trong dropdown
-    * TTLONG 06/07/2021
+    * Create by: TTLONG 06/07/2021
     * */
     handleClickItemDropdown(id) {
         //lấy giá trị của item được clickc trong dropdown-position:
@@ -193,7 +195,7 @@ class BaseJS {
     }
     /**
     * Hàm xử lý click outside dropdown select
-    * TTLONG 06/07/2021
+    * Create by: TTLONG 06/07/2021
     * */
     handleClickOutSide(id) {
         //xử lý khi click outside của đối tượng:
@@ -215,5 +217,55 @@ class BaseJS {
             }
         });*/
      
+    }
+    /**
+    * Hàm check validate bắt buộc nhập
+    * Create by: TTLONG 06/07/2021
+    * */
+    handleInputValidate(id) {
+        $("input[required]").blur(function () {
+            //kiểm tra dữ liệu đã nhập , nếu để trống thì cảnh báo:
+            
+            let value = $(this).val();
+            if (!value) {
+                $(this).addClass("border-red");
+                $(this).attr("title", "Trường này không được phép để trống.");
+            }
+            else {
+                $(this).removeClass("border-red");
+            }
+            
+        })
+        
+    }
+    handleEmailValidate() {  
+        $("input[type='email']").blur(function () {
+            var email = $(this).val();
+            if ($(this).val()) {
+                let regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+                if (!regex.test(email)) {
+                    $(this).addClass("border-red");
+                    $(this).attr("title", "Bạn đã nhập sai định dạng email");
+                } else {
+                    $(this).removeClass("border-red");
+                }
+            }
+            
+        })
+        
+        
+    }
+    /**
+     * Hàm tập hợp các Validate
+     * Create by: TTLONG 06/07/2021
+     * */
+    handleValidate() {
+        this.handleInputValidate("#txtEmployeeCode");
+        
+        this.handleEmailValidate();
+        /*this.handleInputValidate("#txtFullName");
+        this.handleInputValidate("#txtIdentityCard");
+        this.handleInputValidate("#txtCardIssuer");
+        this.handleInputValidate("#txtEmail");*/
     }
 }
