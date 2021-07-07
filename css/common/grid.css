@@ -8,7 +8,6 @@ table {
     
     width: 100%;
     border-spacing: 0;
-    
 }
 
     table thead th, table tbody td {
@@ -20,8 +19,11 @@ table {
         /*xử lý chấm chấm đuôi khi text dài*/
         text-overflow: ellipsis;
         white-space: nowrap;
-        text-align: left;
         overflow: hidden;
+        text-align: left;
+    }
+    table tbody tr:hover{
+        background-color:#a7a3a3;
     }
     /*scroll strong tbody*/
 /*table tbody {

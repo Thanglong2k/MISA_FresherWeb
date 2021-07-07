@@ -56,26 +56,45 @@
     padding: 0 16px;
 }
 
-.header_region {
+.header-region {
     display: flex;
-
+    width:245px;
 }
 /*.region_dropdown {
     margin-right: 10px;
 }*/
-.account_info {
+.account-info {
     display: flex;
     align-items: center;
 }
-.account_avartar {
+.account-avartar {
     width: 30px;
     height: 30px;
     background-size: contain;
     background-repeat: no-repeat;
     background-image: url('../../content/icon/avatar-default.png');
 }
-.account_info .right_item {
+.account-info .right-item {
     margin-left: 16px;
 }
 
+.header-region #dropdown-restaurent {
+    margin-left: 0 !important;
+    border: none;
+    padding: 10px 0;
+    height: 60px;
+    box-sizing: border-box;
+    z-index: 1;
+}
+#dropdown-restaurent input{
+    font-weight:bold;
+    width:calc(100% - 40px);
+}
+#dropdown-restaurent .dropdown-button-select{
+    border-left:none;
+    width:40px;
+}
+#dropdown-restaurent .dropdown-list-box {
+    top:50px;
+}
 

@@ -21,12 +21,10 @@ function formatDate(date) {
 function formatMoney(money) {
 
     if (money) {
-        return money.toFixed(0).replace(/\d(?=(\d{3})+\.)/g, "$&,");
+        return money.toFixed(1).replace(/\d(?=(\d{3})+\.)/g, "$&.");
     }
-    
-
-    var num = money.toFixed(0).replace(/\d(?=(\d{3})+\.)/g, "$&,");
-    return num;
+    /*var num = money.toFixed(0).replace(/\d(?=(\d{3})+\.)/g, "$&,");
+    return num;*/
 
 
 }

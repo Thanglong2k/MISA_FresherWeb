@@ -17,3 +17,11 @@
     background-repeat:no-repeat;
     background-size:cover;
 }
+.icon-check {
+    
+    width: 16px;
+    height: 16px;
+    background-position: left;
+    background-repeat: no-repeat;
+    background-size: contain;
+}

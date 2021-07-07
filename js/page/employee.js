@@ -12,12 +12,13 @@ class EmployeeJS extends BaseJS{
 
         /*this.open();
         this.close();*/
+        
         this.handleEvents();
         this.handleClickItemFormDropdown();
         this.handleClickOutsideItemForm();
     }
-    setDataUrl() {
-        this.getDataUrl = "http://cukcuk.manhnv.net/v1/Employees";
+    setApiRouter() {
+        this.apiRouter = "/v1/Employees";
     }
 
     

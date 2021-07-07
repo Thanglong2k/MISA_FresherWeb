@@ -32,21 +32,34 @@
         box-shadow:1px 1px 10px #bbbbbb;
     }
     .dropdown-list .item-list {
-        cursor:pointer;
-        height:40px;
-        align-items:center;
-        line-height:40px;
-        padding:0 16px;
+        cursor: pointer;
+        height: 40px;
+        align-items: center;
+        line-height: 40px;
+ 
+        display: flex;
     }
     .dropdown-list .item-list:hover {
         background-color: #E9EBEE;
     }
     .dropdown-list .item-list:active {
         background-color: #019160;
-        color:#000000;
+        color: #ffffff;
+            
     }
+        .dropdown-list .item-list:active .icon-check {
+            background-image: url('/content/icon/check.svg');
+            color:#ffffff;
+        }
     .dropdown-list .dropdown-input-text{
         border:none;
         width:calc(100% - 40px);
         height:100%;
+    }
+.dropdown-list-box .item-list .icon-check {
+    margin: 0 10px;
+}
+    .dropdown-list-box .item-list .item-dropdown-text {
+        width: calc(100% - 40px);
+        height: 100%;
     }
