@@ -23,67 +23,76 @@
         <div class="header-left">
             <div class="logo-site">
                 <div class="logo-box">
-                    <div class="toggle-icon"></div>
+                    <div class="toggle-icon" id="toggle-icon"></div>
                     <div class="amis-logo"></div>
                 </div>
 
             </div>
         </div>
         <div class="header-right">
-            <div class="header_region">
+            <div class="header-region">
                 <!--<div class="region_dropdown">Nhà hàng Biển Đông</div>
                 <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
                     <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
                 </svg>-->
-                            <!--<select class="select-restaurent">
+                <!--<select class="select-restaurent">
                     <option>Nhà hàng Biển Đông</option>
                 </select>-->
-                <div class="dropdown-list" id="dropdown-restaurent ">
-                    <input type="text" class="dropdown-input-text" />
+                <div class="dropdown-list" id="dropdown-restaurent">
+                    <input type="text" class="dropdown-input-text" readonly />
                     <div class="dropdown-button-select" hide=true></div>
 
                     <div class="dropdown-list-box" style="display:none;">
-                        <div class="item-list" row>Nhà hàng Biển Đông</div>
-                        <div class="item-list">Fresher Web</div>
-                        <div class="item-list">NCCN</div>
+                        <div class="item-list" value="0">
+                            <div class="icon-check"></div>
+                            <div class="item-dropdown-text">Nhà hàng Biển Bông</div>
+                        </div>
+                        <div class="item-list" value="1" row>
+                            <div class="icon-check"></div>
+                            <div class="item-dropdown-text">MISA Miền Bắc</div>
+                        </div>
+                        <div class="item-list" value="2">
+                            <div class="icon-check"></div>
+                            <div class="item-dropdown-text">MISA Miền Nam</div>
+                        </div>
 
                     </div>
                 </div>
             </div>
             <!-- header right -->
-            <div class="account_info">
+            <div class="account-info">
                 <!-- icon bell -->
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bell" viewBox="0 0 16 16">
                     <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zM8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z" />
                 </svg>
-                <div class="right_item account_avartar"></div>
-                <div class="right_item account_name">
+                <div class="right-item account-avartar"></div>
+                <div class="right-item account-name">
                     Trần Thăng Long
                 </div>
-                <!--<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots-vertical right_item" viewBox="0 0 16 16">
-            <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
-        </svg>-->
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots right_item" viewBox="0 0 16 16">
+                <!--<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots-vertical right-item" viewBox="0 0 16 16">
+                    <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
+                </svg>-->
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots right-item" viewBox="0 0 16 16">
                     <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" />
                 </svg>
             </div>
         </div>
-        
+
 
 
     </div>
     <div class="navbar">
-        
-        <div class="navbar-content">
-            <a class="nav-item">
+
+        <div class="navbar-content" hide="false">
+            <a class="nav-item" href="#">
                 <div class="nav-item-icon nav-item-document-online"></div>
                 <div class="nav-item-text">Hồ sơ điện tử</div>
             </a>
-            <a class="nav-item">
+            <a class="nav-item" href="#">
                 <div class="nav-item-icon nav-item-document-online"></div>
                 <div class="nav-item-text">Hồ sơ giấy</div>
             </a>
-            <a class="nav-item">
+            <a class="nav-item" href="#">
                 <div class="nav-item-icon nav-item-report"></div>
                 <div class="nav-item-text">Theo dõi chi</div>
             </a>
@@ -95,7 +104,7 @@
                 <div class="nav-item-icon nav-item-dic-employee"></div>
                 <div class="nav-item-text">Danh mục khách hàng</div>
             </a>
-            <a class="nav-item">
+            <a class="nav-item" href="#">
                 <div class="nav-item-icon nav-item-setting"></div>
                 <div class="nav-item-text">Thiết lập</div>
             </a>
@@ -115,40 +124,37 @@
         <div class="filter-bar">
             <div class="filter-left">
                 <input class="icon-search input-search" type="text" placeholder="Tìm kiếm theo Mã, Tên nhân viên" />
-                <!--<select class="select">
-                    <option>Tất cả phòng ban</option>
-                    <option>Phòng đào tạo</option>
-                    <option>phòng sản xuất</option>
-                </select>-->
-                <div class="dropdown-list" id="dropdown-department">
+
+                <div class="dropdown-list" id="dropdown-department" fieldValue="DepartmentId" fieldName="DepartmentName" api="/api/Department">
                     <input type="text" class="dropdown-input-text" />
                     <div class="dropdown-button-select" hide=true></div>
                     <div class="dropdown-list-box" style="display:none;">
-                        <div class="item-list" row>Tất cả phòng ban</div>
-                        <div class="item-list">Sản xuất</div>
-                        <div class="item-list">NCCN</div>
+
+                        <div class="item-list" value="0">
+                            <div class="icon-check"></div>
+                            <div class="item-dropdown-text">Tất cả phòng ban</div>
+                        </div>
 
                     </div>
                 </div>
-                <!--<select class="select">
-                    <option>Tất cả vị trí</option>
-                    <option>FresherWeb</option>
-                    <option>Intern HR</option>
-                </select>-->
-                <div class="dropdown-list" id="dropdown-position">
+
+                <div class="dropdown-list" id="dropdown-position" fieldValue="PositionId" fieldName="PositionName" api="/v1/Positions">
                     <input type="text" class="dropdown-input-text" />
                     <div class="dropdown-button-select" hide=true></div>
-                    
-                    <div class="dropdown-list-box" style="display:none;">
-                        <div class="item-list" row>Tất cả vị trí</div>
-                        <div class="item-list">Fresher Web</div>
-                        <div class="item-list">NCCN</div>
 
+                    <div class="dropdown-list-box" style="display:none;">
+
+                        <div class="item-list" value="0">
+                            <div class="icon-check"></div>
+                            <div class="item-dropdown-text">Tất cả vị trí</div>
+                        </div>
                     </div>
                 </div>
             </div>
 
+
             <div class="filter-right">
+                <button class="m-second-button m-btn-delete" id="btnDelete"></button>
                 <button class="m-second-button m-btn-refresh" id="btnRefresh"></button>
             </div>
         </div>
@@ -156,230 +162,24 @@
             <table>
                 <thead>
                     <tr>
-                       
+                        <th fieldName="CheckBox"><input type="checkbox" /></th>
                         <th fieldName="EmployeeCode">Mã nhân viên</th>
                         <th fieldName="FullName">Họ và tên</th>
-                        <th fieldName="GenderName">Giới tính</th>
+                        <th fieldName="GenderName" fieldValue="Gender">Giới tính</th>
                         <th fieldName="DateOfBirth" formatType="ddmmyyyy">Ngày sinh</th>
                         <th fieldName="PhoneNumber">Số điện thoại</th>
                         <th fieldName="Email">Email</th>
-                        <th fieldName="PositionName">Chức vụ</th>
-                        <th fieldName="DepartmentName">Phòng ban</th>
-                        <th fieldName="Salary" formatType="Money ">Mức lương hiện tại</th>
+                        <th fieldName="PositionName" fieldValue="PositionId">Chức vụ</th>
+                        <th fieldName="DepartmentName" fieldValue="DepartmentId">Phòng ban</th>
+                        <th fieldName="Salary" formatType="Money">Mức lương hiện tại</th>
                         <th fieldName="Address">Địa chỉ</th>
                         <th fieldName="WorkStatus">Tinh trạng công việc</th>
-                        
+
 
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- <tr>
-                                            <td>NV00001</td>
-                                            <td>Trần thăng long</td>
-                 
-                                            <td>Nam</td>
-                                            <td class="text-align-center">14/11/2000</td>
-                                            <td>0999999999</td>
-                                            <td>thanglong2222@gmail.com</td>
-                                            <td>Fresher Web</td>
-                                            <td>Sản xuất</td>
-                                            <td id="salary" class="text-align-right"></td>
-                                            <td style="max-width:250px" title="Huwng yeen">Hưng Yêncsdhd dfhdjsfhs dfjdshfdjsfds fdshfdsjfhsdjf jsdfhdsjfhd </td>
-                                            <td>Đang làm việc</td>
-
-                                        </tr>
-                                        <tr>
-                                            <td>NV00001</td>
-                                            <td>Trần thăng long</td>
-                                            <td>Nam</td>
-                                            <td>14/11/2000</td>
-                                            <td>0999999999</td>
-                                            <td>thanglong2222@gmail.com</td>
-                                            <td>Fresher Web</td>
-                                            <td>Sản xuất</td>
-                                            <td>2.000.000</td>
-                                            <td style="max-width:250px">Hưng Yêncsdhd dfhdjsfhs dfjdshfdjsfds fdshfdsjfhsdjf jsdfhdsjfhd </td>
-                                            <td>Đang làm việc</td>
-
-                                        </tr>
-                                        <tr>
-                                            <td>NV00001</td>
-                                            <td>Trần thăng long</td>
-                                            <td>Nam</td>
-                                            <td>14/11/2000</td>
-                                            <td>0999999999</td>
-                                            <td>thanglong2222@gmail.com</td>
-                                            <td>Fresher Web</td>
-                                            <td>Sản xuất</td>
-                                            <td>2.000.000</td>
-                                            <td style="max-width:250px">Hưng Yêncsdhd dfhdjsfhs dfjdshfdjsfds fdshfdsjfhsdjf jsdfhdsjfhd </td>
-                                            <td>Đang làm việc</td>
-
-                                        </tr>
-
-                                        <tr>
-                                            <td>NV00001</td>
-                                            <td>Trần thăng long</td>
-                                            <td>Nam</td>
-                                            <td>14/11/2000</td>
-         
-                                            <td>Nam</td>
-                                            <td class="text-align-center">14/11/2000</td>
-                 
-                                            <td>0999999999</td>
-                                            <td>thanglong2222@gmail.com</td>
-                                            <td>Fresher Web</td>
-                                            <td>Sản xuất</td>
-            
-                                            <td>2.000.000</td>
-                                            <td style="max-width:250px">Hưng Yêncsdhd dfhdjsfhs dfjdshfdjsfds fdshfdsjfhsdjf jsdfhdsjfhd </td>
-             
-                                            <td id="salary" class="text-align-right"></td>
-                                            <td style="max-width:250px" title="Huwng yeen">Hưng Yêncsdhd dfhdjsfhs dfjdshfdjsfds fdshfdsjfhsdjf jsdfhdsjfhd </td>
-                
-                                            <td>Đang làm việc</td>
-
-                                        </tr>
-                                        <tr>
-                                            <td>NV00001</td>
-                                            <td>Trần thăng long</td>
-              
-                                            <td>Nam</td>
-                                            <td>14/11/2000</td>
-                                            <td>0999999999</td>
-                                            <td>thanglong2222@gmail.com</td>
-                                            <td>Fresher Web</td>
-                                            <td>Sản xuất</td>
-                                            <td>2.000.000</td>
-                                            <td style="max-width:250px">Hưng Yêncsdhd dfhdjsfhs dfjdshfdjsfds fdshfdsjfhsdjf jsdfhdsjfhd </td>
-                                            <td>Đang làm việc</td>
-
-                                        </tr>
-                                        <tr>
-                                            <td>NV00001</td>
-                                            <td>Trần thăng long</td>
-            
-                                            <td>Nam</td>
-                                            <td>14/11/2000</td>
-                                            <td>0999999999</td>
-                                            <td>thanglong2222@gmail.com</td>
-                                            <td>Fresher Web</td>
-                                            <td>Sản xuất</td>
-                                            <td>2.000.000</td>
-                                            <td style="max-width:250px">Hưng Yêncsdhd dfhdjsfhs dfjdshfdjsfds fdshfdsjfhsdjf jsdfhdsjfhd </td>
-                                            <td>Đang làm việc</td>
-
-                                        </tr>
-                                        <tr>
-                                            <td>NV00001</td>
-                                            <td>Trần thăng long</td>
-            
-                                            <td>Nam</td>
-                                            <td>14/11/2000</td>
-                                            <td>0999999999</td>
-                                            <td>thanglong2222@gmail.com</td>
-                                            <td>Fresher Web</td>
-                                            <td>Sản xuất</td>
-                                            <td>2.000.000</td>
-                                            <td style="max-width:250px">Hưng Yêncsdhd dfhdjsfhs dfjdshfdjsfds fdshfdsjfhsdjf jsdfhdsjfhd </td>
-                                            <td>Đang làm việc</td>
-
-                                        </tr>
-                                        <tr>
-                                            <td>NV00001</td>
-                                            <td>Trần thăng long</td>
-                 
-                                            <td>Nam</td>
-                                            <td>14/11/2000</td>
-                                            <td>0999999999</td>
-                                            <td>thanglong2222@gmail.com</td>
-                                            <td>Fresher Web</td>
-                                            <td>Sản xuất</td>
-                                            <td>2.000.000</td>
-                                            <td style="max-width:250px">Hưng Yêncsdhd dfhdjsfhs dfjdshfdjsfds fdshfdsjfhsdjf jsdfhdsjfhd </td>
-                                            <td>Đang làm việc</td>
-
-                                        </tr>
-
-                                        <tr>
-                                            <td>NV00001</td>
-                                            <td>Trần thăng long</td>
-                   
-                                            <td>Nam</td>
-                                            <td>14/11/2000</td>
-                                            <td>0999999999</td>
-                                            <td>thanglong2222@gmail.com</td>
-                                            <td>Fresher Web</td>
-                                            <td>Sản xuất</td>
-                                            <td>2.000.000</td>
-                                            <td style="max-width:250px">Hưng Yêncsdhd dfhdjsfhs dfjdshfdjsfds fdshfdsjfhsdjf jsdfhdsjfhd </td>
-                                            <td>Đang làm việc</td>
-
-                                        </tr>
-                                        <tr>
-                                            <td>NV00001</td>
-                                            <td>Trần thăng long</td>
-           
-                                            <td>Nam</td>
-                                            <td>14/11/2000</td>
-                                            <td>0999999999</td>
-                                            <td>thanglong2222@gmail.com</td>
-                                            <td>Fresher Web</td>
-                                            <td>Sản xuất</td>
-                                            <td>2.000.000</td>
-                                            <td style="max-width:250px">Hưng Yêncsdhd dfhdjsfhs dfjdshfdjsfds fdshfdsjfhsdjf jsdfhdsjfhd </td>
-                                            <td>Đang làm việc</td>
-
-                                        </tr>
-                                        <tr>
-                                            <td>NV00001</td>
-                                            <td>Trần thăng long</td>
-                   
-                                            <td>Nam</td>
-                                            <td>14/11/2000</td>
-                                            <td>0999999999</td>
-                                            <td>thanglong2222@gmail.com</td>
-                                            <td>Fresher Web</td>
-                                            <td>Sản xuất</td>
-                                            <td>2.000.000</td>
-                                            <td style="max-width:250px">Hưng Yêncsdhd dfhdjsfhs dfjdshfdjsfds fdshfdsjfhsdjf jsdfhdsjfhd </td>
-                                            <td>Đang làm việc</td>
-
-                                        </tr>
-                                        <tr>
-                                            <td>NV00001</td>
-                                            <td>Trần thăng long</td>
-             
-                                            <td>Nam</td>
-                                            <td>14/11/2000</td>
-                                            <td>0999999999</td>
-                                            <td>thanglong2222@gmail.com</td>
-                                            <td>Fresher Web</td>
-                                            <td>Sản xuất</td>
-                                            <td>2.000.000</td>
-                                            <td style="max-width:250px">Hưng Yêncsdhd dfhdjsfhs dfjdshfdjsfds fdshfdsjfhsdjf jsdfhdsjfhd </td>
-                                            <td>Đang làm việc</td>
-
-                                        </tr>
-                 
-                                        <tr>
-                                            <td>NV00001</td>
-                                            <td>Trần thăng long</td>
-                                            <td>Nam</td>
-                                            <td>14/11/2000</td>
-                                            <td>0999999999</td>
-                                            <td>thanglong2222@gmail.com</td>
-                                            <td>Fresher Web</td>
-                                            <td>Sản xuất</td>
-                                            <td>2.000.000</td>
-                                            <td style="max-width:250px">Hưng Yêncsdhd dfhdjsfhs dfjdshfdjsfds fdshfdsjfhsdjf jsdfhdsjfhd </td>
-                                            <td>Đang làm việc</td>
-
-                                        </tr>-->
-                    
-
-
-
+                    <!--table được load dữ liệu bằng js-->
                 </tbody>
             </table>
         </div>
@@ -438,7 +238,7 @@
                                 <div class="form-item">
                                     <div class="m-label">Họ và tên (<span class="required">*</span>)</div>
                                     <div>
-                                        <input class="m-control" id="txtFullName" fieldName="FullName" type="text" required/>
+                                        <input class="m-control" id="txtFullName" fieldName="FullName" type="text" required />
                                     </div>
                                 </div>
                             </div>
@@ -446,19 +246,28 @@
                                 <div class="form-item">
                                     <div class="m-label">Ngày sinh</div>
                                     <div>
-                                        <input class="m-control" id="dtDateOfBirth"  fieldName="DateOfBirth" type="date" />
+                                        <input class="m-control" id="dtDateOfBirth" fieldName="DateOfBirth" type="date" />
                                     </div>
                                 </div>
                                 <div class="form-item">
                                     <div class="m-label">Giới tính</div>
-                                    <div class="dropdown-list  dropdown-form" id="dropdown-gender">
+                                    <div class="dropdown-list  dropdown-form" fieldName="GenderName" fieldValue="Gender" id="dropdown-gender">
                                         <input type="text" id="drpGender" fieldName="Gender" class="dropdown-input-text" />
                                         <div class="dropdown-button-select" hide=true></div>
 
                                         <div class="dropdown-list-box" style="display:none;">
-                                            <div class="item-list" value="0" row>Nam</div>
-                                            <div class="item-list" value="1">Nữ</div>
-                                            <div class="item-list" value="2">Khác</div>
+                                            <div class="item-list" tabindex="-1" value="1" row>
+                                                <div class="icon-check"></div>
+                                                <div class="item-dropdown-text">Nam</div>
+                                            </div>
+                                            <div class="item-list" value="0">
+                                                <div class="icon-check"></div>
+                                                <div class="item-dropdown-text">Nữ</div>
+                                            </div>
+                                            <div class="item-list" value="3">
+                                                <div class="icon-check"></div>
+                                                <div class="item-dropdown-text">Khác</div>
+                                            </div>
 
                                         </div>
                                     </div>
@@ -470,13 +279,13 @@
                                 <div class="form-item">
                                     <div class="m-label">Số CMTND/Căn cước (<span class="required">*</span>)</div>
                                     <div>
-                                        <input class="m-control" id="txtIdentityNumber"  fieldName="IdentityNumber" type="text" required/>
+                                        <input class="m-control" id="txtIdentityNumber" fieldName="IdentityNumber" type="text" required />
                                     </div>
                                 </div>
                                 <div class="form-item">
                                     <div class="m-label">Ngày cấp</div>
                                     <div>
-                                        <input class="m-control" id="dtIdentityDate"  fieldName="IdentityDate" type="date" />
+                                        <input class="m-control" id="dtIdentityDate" fieldName="IdentityDate" type="date" />
                                     </div>
                                 </div>
 
@@ -485,7 +294,7 @@
                                 <div class="form-item">
                                     <div class="m-label">Nơi cấp</div>
                                     <div>
-                                        <input class="m-control" id="txtIdentityPlace"  fieldName="IdentityPlace" type="text" />
+                                        <input class="m-control" id="txtIdentityPlace" fieldName="IdentityPlace" type="text" />
                                     </div>
                                 </div>
                                 <div class="form-item"></div>
@@ -495,13 +304,13 @@
                                 <div class="form-item">
                                     <div class="m-label">Email (<span class="required">*</span>)</div>
                                     <div>
-                                        <input class="m-control" id="txtEmail"  fieldName="Email" type="email" placeholder="example123@gmail.com" required/>
+                                        <input class="m-control" id="txtEmail" fieldName="Email" type="email" placeholder="example123@gmail.com" required />
                                     </div>
                                 </div>
                                 <div class="form-item">
                                     <div class="m-label">Số điện thoại (<span class="required">*</span>)</div>
                                     <div>
-                                        <input class="m-control" id="txtPhoneNumber"  fieldName="PhoneNumber" type="number" required/>
+                                        <input class="m-control" id="txtPhoneNumber" fieldName="PhoneNumber" type="number" required />
                                     </div>
                                 </div>
                             </div>
@@ -516,28 +325,24 @@
                             <div class="m-row">
                                 <div class="form-item">
                                     <div class="m-label">Vị trí</div>
-                                    <div class="dropdown-list  dropdown-form" id="dropdown-form-position">
-                                        <input type="text" id="drpPosition"  fieldName="PositionId" class="dropdown-input-text" />
+                                    <div class="dropdown-list  dropdown-form" fieldValue="PositionId" fieldName="PositionName" api="/v1/Positions" id="dropdown-form-position">
+                                        <input type="text" id="drpPosition" fieldName="PositionId" class="dropdown-input-text" />
                                         <div class="dropdown-button-select" hide=true></div>
 
                                         <div class="dropdown-list-box" style="display:none;">
-                                            <div class="item-list" row>FresherWeb</div>
-                                            <div class="item-list">NCCN</div>
-                                            <div class="item-list">Khác</div>
+                                            <!--load nội dung bên js-->
 
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-item">
                                     <div class="m-label">Phòng ban</div>
-                                    <div class="dropdown-list dropdown-form" id="dropdown-form-department">
-                                        <input type="text" id="drpDepartment" fieldName="DepartmentId" class="dropdown-input-text" />
+                                    <div class="dropdown-list dropdown-form" fieldValue="DepartmentId" fieldName="DepartmentName" api="/api/Department" id="dropdown-form-department">
+                                        <input type="text" id="drpDepartment" fieldValue="DepartmentId" fieldName="DepartmentName" class="dropdown-input-text" />
                                         <div class="dropdown-button-select" hide=true></div>
 
                                         <div class="dropdown-list-box" style="display:none;">
-                                            <div class="item-list" row>Phòng nhân sự</div>
-                                            <div class="item-list">phòng sản xuất</div>
-                                            <div class="item-list">Khác</div>
+                                            <!--load nội dung bên js-->
 
                                         </div>
                                     </div>
@@ -566,14 +371,23 @@
                                 </div>
                                 <div class="form-item">
                                     <div class="m-label">Tình trạng công việc</div>
-                                    <div class="dropdown-list  dropdown-form" id="dropdown-form-workstatus">
+                                    <div class="dropdown-list  dropdown-form" fieldValue="WorkStatus" id="dropdown-form-workstatus">
                                         <input type="text" id="txtWorkStatus" fieldName="WorkStatus" class="dropdown-input-text" />
                                         <div class="dropdown-button-select" hide=true></div>
 
                                         <div class="dropdown-list-box" style="display:none;">
-                                            <div class="item-list" row>Đang làm việc</div>
-                                            <div class="item-list">Đã nghỉ làm</div>
-                                            <div class="item-list">Khác</div>
+                                            <div class="item-list" value="0" row>
+                                                <div class="icon-check"></div>
+                                                <div class="item-dropdown-text">Đang làm việc</div>
+                                            </div>
+                                            <div class="item-list" value="1">
+                                                <div class="icon-check"></div>
+                                                <div class="item-dropdown-text">Đã nghỉ làm</div>
+                                            </div>
+                                            <div class="item-list" value="2">
+                                                <div class="icon-check"></div>
+                                                <div class="item-dropdown-text">Khác</div>
+                                            </div>
 
                                         </div>
                                     </div>
@@ -594,11 +408,29 @@
         </div>
 
     </div>
+    <div class="loading">
+        <div class="loading-modal"></div>
+        <div class="loading-icon"></div>
 
+    </div>
+    <div class="toast">
+        <div class="toast-icon">
+            <i class="fas fa-check-circle"></i>
+        </div>
+        <div class="toast-body">
+            <h3 class="toast-title">Success</h3>
+            <p class="toast-msg">Thành công</i>
+        </div>
+        <div class="toast-close">
+            <i class="fal fa-times-circle"></i>
+        </div>
+    </div>
     <!--thứ tự nhúng jquery :jquery,common,js-->
     <script src="/lib/jquery-3.6.0.min.js"></script>
+    <script src="/lib/jquery-ui.min.js"></script>
     <script src="/js/common/common.js"></script>
     <script src="/js/common/base.js"></script>
+    <script src="/js/common/validate.js"></script>
     <script src="/js/page/employee.js"></script>
 
     <!--<script>

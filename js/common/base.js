@@ -1,15 +1,89 @@
 ﻿
-
 /**
      * Tạo đối tượng quản lý chung để thực hiện các chức năng chung cho các đối tượng employee, customer kế thừa
      * Created by : TTLONG (2/7/2021)
      * */
 class BaseJS {
     constructor() {
+        this.host = "http://cukcuk.manhnv.net";
+        this.apiRouter = null;
         this.getDataUrl = null;
-        this.setDataUrl();
+        this.setApiRouter();
+        this.loadDropdown();
         this.loadData();
+        //this.includeFunctionDefaultDropdown();
+        //this.loadDefaultDropdownValue();
         this.initEvents();
+        
+        this.Gender = 0;
+        this.PositionID = 0;
+        this.DepartmentID = 0;
+        this.WorkStatus = 0;
+
+    }
+    loadDropdown() {
+        let me = this;
+        //khi load data thì hiển thị loading
+        $(".loading").show();
+        
+        //load dữ liệu cho các dropdown
+        try {
+            var dropdowns = $(".dropdown-list")
+
+            $.each(dropdowns, function (index, dropdown) {
+                let arrayItemDropdown = [
+                    { value: "", text: "" }
+                ];
+                var fieldValue = $(dropdown).attr("fieldValue");
+                var fieldName = $(dropdown).attr("fieldName");
+                var api = $(dropdown).attr("api");
+                
+                if (api != undefined) {
+                    //#region lấy dữ liệu vị trí
+                    $.ajax({
+                        url: me.host + api,
+                        method: "GET",
+                        async: false
+                    }).done(function (res) {
+                        if (res) {
+                            $.each(res, function (index, obj) {
+                                var rowDropdown = $(`<div class="item-list" value="${obj[fieldValue]}">
+                                                <div class="icon-check"></div>
+                                                <div class="item-dropdown-text">${obj[fieldName]}</div>
+                                            </div>`);
+                                $(dropdown).children(".dropdown-list-box").append(rowDropdown);
+                                arrayItemDropdown.push({ value:$(rowDropdown).attr("value"), text:$(rowDropdown).children(".item-dropdown-text").text() });
+                            })
+                            
+                            //console.log($(dropdown).children("input").val());
+                            //$(dropdown).children("input").val(arrayItemDropdown[0].text);
+                        }
+                    }).fail(function (res) {
+                        console.log(res);
+                    })
+                    //#endregion
+                    //tắt loading khi load dữ liệu xong
+                    
+                }
+                var itemDropdown = $(dropdown).children(".dropdown-list-box").children(":first");
+
+                $(itemDropdown).attr("selected", "");
+                $(itemDropdown).addClass("selected");
+                $(dropdown).children("input").val($(itemDropdown).find(".item-dropdown-text").text());
+                $(".loading").hide();
+            })
+        }
+        catch(e) {
+            console.log(e);
+        }
+        
+        
+    }
+    setApiRouter() {
+    
+    }
+    setDataUrl() {
+
     }
     /**
      * Hàm xử lý các sự kiện trên giao diện
@@ -17,11 +91,210 @@ class BaseJS {
      * */
     initEvents() {
         var me = this;
+        
+        //hiển thị form thông tin khi doubleclick vào từng dòng trong table:
+        me.clickDblRowTable()
+        //click vào bản ghi
+        me.clickRowTable();
+        //select item dropdown
+        me.clickItemDropdown();
+        //click dropdown
+        me.clickDropdown();
+        
+        //click outside object
+        me.clickOutsideDropdown();
+        //click button
+        me.clickButton();
+        //click logo icon header
+        me.clickToggleNavbar();
+        //event keyup
+        me.eventKeyUp();
+    }
+    
+    /**
+    * Hàm load dữ liệu dùng chung cho các trang
+    * Create by: TTLONG 02/07/2021
+    * */
+    loadData() {
+        var me = this;
+        try {
+            
+            //làm rỗng bảng để load lại dữ liệu
+            $("table tbody").empty();
+
+            
+            $(".loading").show();
+            //lấy thông tin các cột dữ liệu
+
+            var columns = $("table tr th");
+            var fieldNames = [];
+            //lấy dữ liệu về
+            $.ajax({
+                url: me.host + me.apiRouter,
+
+                method: "GET"
+            }).done(function (res) {//chạy ko có lỗi, res là data khi sử dụng postman nó trả về res
+                $.each(res, function (index, obj) {
+                    var tr = $(`<tr fieldName="EmployeeId"></tr>`);
+                    var fieldNameRow = $(tr).attr("fieldName");
+                    $(tr).data('recordId', obj[fieldNameRow]);
+                    //lấy thông tin dữ liệu sẽ map tương ứng với các cột:
+                    $.each(columns, function (index, th) {
+                        var td = $(`<td><div><span></span></div></td>`);
+                        var fieldName = $(th).attr("fieldName");
+                        var formatType = $(th).attr("formatType");
+                        var value = obj[fieldName];
+                        if (fieldName == "CheckBox") {
+                            value = $(`<input type="checkbox"/>`);
+                        }
+                        
+                        switch (formatType) {
+                            case "ddmmyyyy":
+                                value = formatDate(value);
+                                td.addClass("text-align-center");
+                                break;
+                            case "Money":
+                                value = formatMoney(value);
+                                td.addClass("text-align-right");
+                                break;
+                            default:
+                        }
+                        
+                        $(td).find("span").append(value);
+                        $(tr).append(td);
+                    })
+                    $("table tbody").append(tr);
+                })
+                $(".loading").hide();
+
+            }).fail(function (res) {//chạy có lỗi
+                $(".loading").hide();
+            })
+            
+             //binding dữ liệu lên table
+
+        } catch (e) {
+
+        }
+
+    }
+    /**
+    * Hàm xử lý hide/show dropdown
+    * Create by: TTLONG 06/07/2021
+    * @param {any} id id của các dropdown
+    * */
+     handleDropdown(id) {
+        let me = this;
+        // hide/show khi click select vị trí:
+        $(id + " .dropdown-button-select").click(function (e) {
+
+            if ($(this).attr("hide") == "true") {
+                $(this).attr("hide", "false");
+                $(id + " .dropdown-list-box").show();
+                $(this).css("background-image", "url('../../content/icon/chevron-up.svg')");
+            }
+            else {
+                $(this).attr("hide", "true");
+                $(id + " .dropdown-list-box").hide();
+                $(this).css("background-image", "url('../../content/icon/chevron-down.svg')");
+            }
+            e.stopPropagation();
+        })
+    }
+    /**
+     * Hàm xử lý click vào item trong dropdown
+     * Create by: TTLONG 06/07/2021
+     * @param {any} id id của các dropdown
+     */
+    handleClickItemDropdown(id) {
+        var me = this;
+        //lấy giá trị của item được clickc trong dropdown:
+        //bắt sự kiện vào div chứa các item cần lấy dữ liệu vì khi này nó sẽ được render và item chưa được sinh ra nên không thể bắt sự kiện vào các item
+        
+            $(id+" .dropdown-list-box").on("click", ".item-list", function () {
+                //lấy giá trị của item vừa chọn
+                //var text = $(this).attr("value");
+                $(this).attr("selected", "");
+                $(this).addClass("selected");
+                $(this).siblings().removeClass("selected");
+                $(this).closest(".dropdown-list").addClass("success-border");
+                
+                var text = $(this).find(".item-dropdown-text").text();
+                
+                //hiển thị giá trị lên input
+                $(id + " input").val(text);
+
+                
+                //ẩn danh sách chọn đi
+                $(id + " .dropdown-list-box").hide();
+            })
+  
+        
+    }
+    
+    /**
+    * Hàm xử lý click outside dropdown select
+    * Create by: TTLONG 06/07/2021
+    * @param {any} id id của các dropdown
+    * */
+    handleClickOutSide(id) {
+        //xử lý khi click outside của đối tượng:
+        $(document).click(function () {
+            $(id+" .dropdown-list-box").hide();
+            $(id+" .dropdown-button-select").attr("hide", "true");
+            $(id+" .dropdown-button-select").css("background-image", "url('../../content/icon/chevron-down.svg')");
+        });
+    }
+    
+    /**
+     * Hàm tập hợp các sự kiện click item dropdown của các dropdown khác nhau
+     * Create by: TTLONG 07/07/2021
+     * */
+    clickItemDropdown() {
+        this.handleClickItemDropdown("#dropdown-department");
+        this.handleClickItemDropdown("#dropdown-position");
+        this.handleClickItemDropdown("#dropdown-restaurent");
+    }
+    /**
+     * Hàm tập hợp các sự kiện click dropdown của các dropdown khác nhau
+     * Create by: TTLONG 07/07/2021
+     * */
+    clickDropdown() {
+        //hide/show dropdown department
+        this.handleDropdown("#dropdown-department");
+        //hide/show dropdown position
+        this.handleDropdown("#dropdown-position");
+        //hide/show dropdown restaurent
+        this.handleDropdown("#dropdown-restaurent");
+    }
+    /**
+     * Hàm tập hợp các sự kiện click outside dropdown của các dropdown khác nhau
+     * Create by: TTLONG 07/07/2021
+     * */
+    clickOutsideDropdown() {
+        this.handleClickOutSide("#dropdown-department");
+        this.handleClickOutSide("#dropdown-position");
+        this.handleClickOutSide("#dropdown-restaurent");
+    }
+    /**
+     * Hàm tập hợp các sự kiện click button
+     * Create by: TTLONG 07/07/2021
+     * */
+    clickButton() {
+        let me = this;
         //sự kiện click khi nhấn thêm mới:
         $("#btnAdd").click(function () {
-            //Hiển thị dialog thông tin chi tiết:
-            $(".dialog-detail").show();
+            try {
+                me.FormMode = "Add";
+                //Hiển thị dialog thông tin chi tiết:
+                $(".dialog-detail").show();
+                //me.loadDropdown();
+            } catch (e) {
+                console.log(e);
+            }
+            
         })
+        //#region
         //sự kiện click khi nhấn button "X" trên form:
         $("#btnClose").click(function () {
             //Ẩn dialog thông tin chi tiết:
@@ -32,52 +305,61 @@ class BaseJS {
             //Hiển thị dialog thông tin chi tiết:
             me.loadData();
         })
-        //hiển thị form thông tin khi doubleclick vào từng dòng trong table:
-        $("table tbody").on("dblclick","tr",function () {
-            //Hiển thị dialog thông tin chi tiết:
-            $(".dialog-detail").show();
-            //xóa tất cả background color của những tr khác:
- 
-            /*let trSiblings = $(this).siblings();//lấy tất cả tr đồng cấp
-            $(trSiblings).css("background-color", "transparent")*/
-            $("tr:nth-child(even)").css("background-color", "#F5F5F5");
-            $("tr:nth-child(odd)").css("background-color", "transparent");
-            //highlight row vừa chọn -> thay đổi background của tr đang click:
-            $(this).css("background", "#8ec252");
-            
-        })
-        /*//filter select phòng ban:
-        $("#dropdown-department .dropdown-button-select").click(function () {
-            $("#dropdown-department .dropdown-list-box").toggle();
-        })*/
-       
-        /*//lấy giá trị của item được click trong dropdown-department:
-        $("#dropdown-department .item-list").click(function () {
-            //lấy giá trị của item vừa chọn
-            var text = $(this).text();
-            //hiển thị giá trị lên input
-            $("#dropdown-department input").val(text);
-            //ẩn danh sách chọn đi
-            $("#dropdown-department .dropdown-list-box").hide();
-        })*/
-        //select item dropdown
-        me.handleClickItemDropdown("#dropdown-department");
-        me.handleClickItemDropdown("#dropdown-position");
-       
-        //hide/show dropdown department
-        me.handleDropdown("#dropdown-department");
-        //hide/show dropdown position
-        me.handleDropdown("#dropdown-position");
-        me.handleDropdown("#dropdown-restaurent");
-        //click outside object
-        me.handleClickOutSide("#dropdown-department");
-        me.handleClickOutSide("#dropdown-position");
+        //xóa các dữ liệu được chọn khi nhấn button xóa:
+        me.deleteRow ();
         //ẩn form chi tiết khi nhấn hủy:
         $("#btnCancel").click(function () {
             //Ẩn dialog thông tin chi tiết:
             $(".dialog-detail").hide();
         })
+        //#endregion
         //thực hiện lưu dữ liệu khi nhấn button "Lưu" trên form:
+        me.save();
+    }
+    /**
+     * Hàm lấy giá trị mặc định của dropdown khi load trang
+     * Create by: TTLONG 07/07/2021
+     * @param {any} id id của các thẻ div chứa dropbox
+     */
+    /**
+     * Lấy giá trị mặc định cho input dropdown
+     * Create by: TTLONG 08/07/2021
+     * */
+    /*loadDefaultDropdownValue() {
+        //lấy giá trị text của item department có attribute là row của dropdown vào inout
+        *//*var textItem = $(id +" .dropdown-list-box .item-list:first-child .item-dropdown-text").text();        
+        $(id+" input").val(textItem);*//*
+        var itemDropdowns = $(".dropdown-list");
+        $.each(itemDropdowns, function (index, itemDropdown) {
+            let itemList = $(this).children(".dropdown-list-box").children();
+            $.each(itemList, function (index, item) {
+                console.log($(item).html());
+            })
+            *//*var textItem = $(this).find(".dropdown-list-box .item-list:first-child .item-dropdown-text").text();
+            $(this).find("input").val(textItem);*//*
+        })
+        
+
+    }*/
+    /**
+    * Hàm tập hợp các hàm lấy giá trị mặc định của dropdown khi load trang
+    * Create by: TTLONG 07/07/2021
+    * */
+    includeFunctionDefaultDropdown() {
+        this.loadDefaultDropdownValue("#dropdown-department");
+        this.loadDefaultDropdownValue("#dropdown-position");
+        this.loadDefaultDropdownValue("#dropdown-restaurent");
+        this.loadDefaultDropdownValue("#dropdown-gender");
+        this.loadDefaultDropdownValue("#dropdown-form-department");
+        this.loadDefaultDropdownValue("#dropdown-form-position");
+        this.loadDefaultDropdownValue("#dropdown-form-workstatus");
+    }
+    /**
+    * Hàm lưu lại thông tin thêm mới hoặc chỉnh sửa dữ liệu
+    * Create by: TTLONG 07/07/2021
+    * */
+    save() {
+        let me = this;
         $("#btnSave").click(function () {
             //validate dữ liệu:
             var inputValidates = $('input[required],input[type="email"]');
@@ -94,236 +376,377 @@ class BaseJS {
             //thu thập thông tin dữ liệu được nhập - >build thành object:
             var employee = {};
             var inputs = $('input[fieldName]');
-            $.each(inputs, function (index,input) {
+            $.each(inputs, function (index, input) {
                 var propertyName = $(this).attr('fieldName');
+                /*if ($(this).parent().attr('fieldValue')) {
+                    var propertyValue = $(this).parent().attr('fieldValue');
+                    employee[propertyValue] = value;
+                }*/
+
+                /*var value = $(this).val();
+                if (propertyName == "Gender") {
+                    //employee["GenderName"] = value;//gán GenderName=textGender
+                    value = me.Gender;//gán value = value Gender để lưu vào trường Gender trong DB
+                }
+                else if (propertyName == "DepartmentId") {
+                    //employee["GenderName"] = value;//gán GenderName=textGender
+                    value = me.DepartmentID;//gán value = value Gender để lưu vào trường Gender trong DB
+                }
+                else if (propertyName == "PositionId") {
+                    //employee["GenderName"] = value;//gán GenderName=textGender
+                    value = me.PositionID;//gán value = value Gender để lưu vào trường Gender trong DB
+                }
+                else if (propertyName == "WorkStatus") {
+                    //employee["GenderName"] = value;//gán GenderName=textGender
+                    value = me.WorkStatus;//gán value = value Gender để lưu vào trường Gender trong DB
+                }*/
                 var value = $(this).val();
-                employee[propertyName]=value;
+                employee[propertyName] = value; 
+                if ($(this).attr("class") == "dropdown-input-text") {
+                    propertyName = $(this).parent().attr('fieldName');
+                    let propertyValue = $(this).parent().attr('fieldValue');
+                    let textInput = $(this).val();
+                    let items = $(this).siblings(".dropdown-list-box").children(".item-list");
+                    $.each(items, function (index, item) {
+                        if ($(item).children(".item-dropdown-text").text() == textInput) {
+                            
+                            employee[propertyName] = textInput;
+                            employee[propertyValue] = $(this).attr("value");
+                        }
+                    })
+
+                }
+                
             })
-            
-            /*var employee = {
-                EmployeeCode: $("#txtEmployeeCode").val(),
-                FullName: $("#txtFullName").val(),
-                DateOfBirth: $("#dtDateOfBirth").val(),
-                GenderName: $("#drpGender").val(),
-                IdentityNumber: $("#txtIdentityNumber").val(),
-                IdentityDate: $("#dtIdentityDate").val(),
-                IdentityPlace: $("#txtIdentityPlace").val(),
-                Email: $("#txtEmail").val(),
-                PhoneNumber: $("#txtPhoneNumber").val(),
-                PositionName: $("#drpPosition").val(),
-                DepartmentName: $("#drpDepartment").val(),
-                PersonalTaxCode: $("#txtPersonalTaxCode").val(),
-                Salary: $("#txtSalary").val(),
-                JoinDate: $("#dtJoinDate").val(),
-                WorkStatus: $("#txtWorkStatus").val(),
-            }*/
-            
+
+
+            var method = "POST";
+            var idRow = "";
+            var textAlert = "Thêm thành công!";
+            if (me.FormMode == "Edit") {
+                method = "PUT";
+                employee.EmployeeId = me.recordId;
+                idRow += `/${me.recordId}`;
+                textAlert = "Sửa thành công!"
+            }
+
             //gọi service tương ứng thực hiện lưu trữ dữ liệu:
             $.ajax({
-                url: 'http://cukcuk.manhnv.net/v1/Employees',
-                method: 'POST',
+                url: me.host + me.apiRouter + idRow,
+                method: method,
                 data: JSON.stringify(employee),
-               /* crossDomain: true,
-                dataType:'jsonp',//giải quyết được tình trạng tên miền chéo*/
-                contentType:'application/json'
+                /* crossDomain: true,
+                    dataType:'jsonp',//giải quyết được tình trạng tên miền chéo*/
+                contentType: 'application/json'
             }).done(function (res) {
                 //sau khi lưu thành công -> đưa ra thông báo cho người dùng, ẩn form chi tiết, load lại dữ liệu:
-                alert("Thêm thành công!");
+                alert(textAlert);
                 me.loadData();
                 $(".dialog-detail").hide();
-                debugger;
+
             }).fail(function (res) {
-                debugger;
+                alert("Đã xảy ra lỗi. Vui lòng liên hệ Misa");
             })
+
+
+
+        })
+    }
+    /**
+    * Hàm xóa dữ liệu
+    * Create by: TTLONG 07/07/2021
+    * */
+    deleteRow() {
+        let me = this;
+        $("#btnDelete").click(function () {
+            //Hiển thị dialog thông tin chi tiết:
+            var trs = $('table tbody tr[selected]');
+            $.each(trs, function (index, tr) {
+                var method = "DELETE";
+                var textAlert = "Xóa thành công!";
+                var idRow=`/${$(tr).data("recordId")}`;
+
+
+                //gọi service tương ứng thực hiện lưu trữ dữ liệu:
+                $.ajax({
+                    url: me.host + me.apiRouter + idRow,
+                    method: method,
+                    /* crossDomain: true,
+                        dataType:'jsonp',//giải quyết được tình trạng tên miền chéo*/
+                    contentType: 'application/json'
+                }).done(function (res) {
+                    //sau khi lưu thành công -> đưa ra thông báo cho người dùng, ẩn form chi tiết, load lại dữ liệu:
+                    alert(textAlert);
+
+
+                    me.loadData();
+
+                }).fail(function (res) {
+
+                })
+            })
+
+
+
+
+        })
+    }
+    /**
+    * double click vào 1 hàng trong table 
+    * Create by: TTLONG 09/07/2021
+    * */
+    clickDblRowTable() {
+        let me = this;
+        $("table tbody").on("dblclick", "tr", function () {
+
+            me.FormMode = "Edit";
+            //Lấy khóa chính của bản ghi:
+            var recordId = $(this).data("recordId");
+            me.recordId = recordId;
+            //Gọi service lấy thông tin chi tiết qua id:
+            $.ajax({
+                url: me.host + me.apiRouter + `/${recordId}`,
+                method: "GET"
+
+            }).done(function (res) {
+                //Build dữ liệu lên form chi tiết:
+                //thu thập thông tin dữ liệu được nhập - >build thành object:
+                var employee = {};
+                var inputs = $('input[fieldName]');
+                $.each(inputs, function (index, input) {
+                    var propertyName = $(this).attr('fieldName');
+                    var text = res[propertyName];
+                    if ($(this).attr("class") == "dropdown-input-text") {
+                        propertyName = $(this).parent().attr('fieldName');
+                        let propertyValue = $(this).parent().attr('fieldValue');
+                        let items = $(this).siblings(".dropdown-list-box").children(".item-list");
+                        $.each(items, function (index, item) {
+                            if ($(item).attr("value") == res[propertyValue]) {
+                                text = $(item).children(".item-dropdown-text").text();
+                            }
+                        })
+                      
+                    }
+                    $(this).val(text);
+                })
+            }).fail(function (res) {
+                alert("Đã xảy ra lỗi. Hãy liên hệ Misa để đưuọc hỗ trợ");
+            })
+
+            //Hiển thị dialog thông tin chi tiết:
+            $(".dialog-detail").show();
+            //Load Form:
+            //me.loadDropdown();
+            //xóa tất cả background color của những tr khác:
+
+            /*let trSiblings = $(this).siblings();//lấy tất cả tr đồng cấp
+            $(trSiblings).css("background-color", "transparent")*/
+            $("tr:nth-child(even)").css("background-color", "#F5F5F5");
+            $("tr:nth-child(odd)").css("background-color", "transparent");
+            //highlight row vừa chọn -> thay đổi background của tr đang click:
+            $(this).css("background", "#8ec252");
+
+
+
+        })
+    }
+    /**
+    * click vào các hàng trong table
+    * Create by: TTLONG 09/07/2021
+    * */
+    clickRowTable() {
+        let me = this;
+        $("table tbody").on("click", "tr", function (event) {
+
+
+            //Lấy khóa chính của bản ghi:
+            var recordId = $(this).data("recordId");
+            me.recordId = recordId;
+
+            if ($(this).attr("selected")) {
+                $(this).removeAttr("selected");
+                $(this).children("td").find("input").removeAttr("checked");
+
+                $(this).css("background", "transparent");
+                
+            } else {
+                $(this).attr("selected", "");
+                $(this).children("td").find("input").attr("checked","");
+
+                $(this).css("background", "#8ec252");
+            }
+            
+            /*if (event.target.type !== 'checkbox') {
+                $(':checkbox', this).trigger('click');
+            }*/
+                
+           
+
+        })
+    }
+    /**
+    * click toggle icon trên logo để thực hiện thức năng thu gọn navbar và mở rộng navbar
+    * Create by: TTLONG 10/07/2021
+    * */
+    clickToggleNavbar() {
+        $("#toggle-icon").click(function () {
+            
+            $(".navbar .navbar-content .nav-item-text").toggle();
+            if ($(".navbar .navbar-content").attr("hide")==="true") {               
+                $(".navbar").width(220);
+                $(".navbar .navbar-content").attr("hide","false");
+            }
+            else { 
+                $(".navbar").width(52);
+                $(".navbar .navbar-content").attr("hide","true");
+            }
+            let widthNavbar = $(".navbar").width();
+            //"width:calc(100% - " + `${widthNavbar}` + ")", 
+            $(".content").css({ "width": `calc(100% - ${widthNavbar+1}px)`, "left": `calc(${widthNavbar+1}px)` });
             
         })
-        me.handleValidate();
     }
     
     /**
-    * Hàm load dữ liệu dùng chung cho các trang
-    * Create by: TTLONG 02/07/2021
-    * */
-    loadData() {
-
-        try {
-            //làm rỗng bảng để load lại dữ liệu
-            $("table tbody").empty();
-
-            //lấy giá trị text của item department có attribute là row của dropdown vào inout
-            var textItem = $("#dropdown-department .dropdown-list-box .item-list").closest("#dropdown-department").find("[row]").text();
-            $("#dropdown-department input").val(textItem);
-
-            //lấy giá trị text của item position có attribute là row của dropdown vào inout
-            var textItem = $("#dropdown-position .dropdown-list-box .item-list").closest("#dropdown-position").find("[row]").text();
-            $("#dropdown-position input").val(textItem);
-
-            //lấy thông tin các cột dữ liệu
-
-            var columns = $("table tr th");
-            var fieldNames = [];
-            var getDataUrl = this.getDataUrl;
-            //lấy dữ liệu về
-            $.ajax({
-                url: getDataUrl,
-
-                method: "GET"
-            }).done(function (res) {//chạy ko có lỗi, res là data khi sử dụng postman nó trả về res
-                $.each(res, function (index, obj) {
-                    var tr = $(`<tr></tr>`);
-                    //lấy thông tin dữ liệu sẽ map tương ứng với các cột:
-                    $.each(columns, function (index, th) {
-                        var td = $(`<td><div><span></span></div></td>`);
-                        var fieldName = $(th).attr("fieldName");
-                        var formatType = $(th).attr("formatType");
-                        var value = obj[fieldName];
-                        switch (formatType) {
-                            case "ddmmyyyy":
-                                value = formatDate(value);
-                                td.addClass("text-align-center");
-                                break;
-                            case "Money":
-                                value = formatMoney(value);
-                                td.addClass("text-align-right");
-                                break;
-                            default:
-                        }
-                        
-                        td.append(value);
-                        $(tr).append(td);
-                    })
-                    $("table tbody").append(tr);
-                })
-
-
-            }).fail(function (res) {//chạy có lỗi
-
-            })
-             //binding dữ liệu lên table
-
-        } catch (e) {
-
-        }
-
-    }
-    /**
-    * Hàm xử lý hide/show dropdown
-    * Create by: TTLONG 06/07/2021
-    * */
-    handleDropdown(id) {
-        // hide/show khi click select vị trí:
-        $(id + " .dropdown-button-select").click(function (e) {
-            if ($(this).attr("hide") == "true") {
-                $(this).attr("hide", "false");
-                $(id + " .dropdown-list-box").show();
-                $(this).css("background-image", "url('../../content/icon/chevron-up.svg')");
+     * Hàm gõ phím trong input để lọc thông tin
+     * Create by: TTLONG 11/07/2021
+     * */
+    eventKeyUp() {
+        let me = this;
+        $("input.dropdown-input-text").keyup(function (e) {
+            
+            var checkSuccess = false;
+            var inputText = $(this).val();
+            var itemDropdowns = $(this).siblings(".dropdown-list-box");
+            
+            if ($(this).text() == "") {
+                $(itemDropdowns).children(".item-list").removeAttr("selected");
+                $(itemDropdowns).children(".item-list").removeClass("selected");
+            }//có sự kiện nhấn phím thì mở dropdown
+            itemDropdowns = $(itemDropdowns).find(".item-dropdown-text");
+            if ($(this).siblings(".dropdown-button-select").attr("hide") == "true") {
+                $(this).siblings(".dropdown-button-select").attr("hide", "false");
+                $(this).siblings(".dropdown-list-box").slideDown();
+                $(this).siblings(".dropdown-button-select").css("background-image", "url('../../content/icon/chevron-up.svg')");
             }
-            else {
-                $(this).attr("hide", "true");
-                $(id + " .dropdown-list-box").hide();
-                $(this).css("background-image", "url('../../content/icon/chevron-down.svg')");
-            }
+            /*else {
+                $(this).siblings(".dropdown-button-select").attr("hide", "true");
+                $(this).siblings(".dropdown-list-box").hide();
+                $(this).siblings(".dropdown-button-select").css("background-image", "url('../../content/icon/chevron-down.svg')");
+            }*/
             e.stopPropagation();
-
-        })
-    }
-    /**
-    * Hàm xử lý click vào item trong dropdown
-    * Create by: TTLONG 06/07/2021
-    * */
-    handleClickItemDropdown(id) {
-        //lấy giá trị của item được clickc trong dropdown-position:
-        $(id+" .item-list").click(function () {
-            //lấy giá trị của item vừa chọn
-            var text = $(this).attr("value");
-          
-            //hiển thị giá trị lên input
-            $(id+" input").val(text);
-            //ẩn danh sách chọn đi
-            $(id+" .dropdown-list-box").hide();
-        })
-    }
-    /**
-    * Hàm xử lý click outside dropdown select
-    * Create by: TTLONG 06/07/2021
-    * */
-    handleClickOutSide(id) {
-        //xử lý khi click outside của đối tượng:
-        $(document).click(function () {
-            $(id+" .dropdown-list-box").hide();
-            $(id+" .dropdown-button-select").attr("hide", "true");
-            $(id+" .dropdown-button-select").css("background-image", "url('../../content/icon/chevron-down.svg')");
-        });
-        /*$(document).click(function (evt) {
-            var target = evt.target.className;
-            var inside = $(id+" .dropdown-list-box");
-            *//*alert($(target).html());*//*
-            if ($.trim(target) != '') {
-                if ($("." + target) != inside) {
-                    $(id +" .dropdown-button-select").attr("hide", "true");
-                    $(id +" .dropdown-list-box").hide();
-                    $(id +" .dropdown-button-select").css("background-image", "url('../../content/icon/chevron-down.svg')");
-                }
-            }
-        });*/
-     
-    }
-    /**
-    * Hàm check validate bắt buộc nhập
-    * Create by: TTLONG 06/07/2021
-    * */
-    handleInputValidate(id) {
-        $("input[required]").blur(function () {
-            //kiểm tra dữ liệu đã nhập , nếu để trống thì cảnh báo:
-            
-            let value = $(this).val();
-            if (!value) {
-                $(this).addClass("border-red");
-                $(this).attr("title", "Trường này không được phép để trống.");
-                $(this).attr("validate", false);
+            //nếu input rỗng thì đóng dropdown
+            if (inputText == "") {
+                $(this).siblings(".dropdown-button-select").attr("hide", "true");
+                $(this).siblings(".dropdown-list-box").slideUp();
+                $(this).siblings(".dropdown-button-select").css("background-image", "url('../../content/icon/chevron-down.svg')");
             }
             else {
-                $(this).removeClass("border-red");
-                $(this).attr("validate", true);
+                //hiện các item có chưa key và ẩn những cái khác
+                $.each(itemDropdowns, function (index, itemDropdown) {
+                    /*$(`itemDropdown:contains("${inputText}")`)*/
+
+                    if ($(itemDropdown).text().toUpperCase().includes(inputText.toUpperCase())) {
+                        $(this).parent().show();
+                        /*$(this).parent().attr("selected", "");
+                        $(this).parent().siblings().removeClass("selected");
+                        $(this).parent().addClass("selected", "");
+    
+                        $(this).closest(".dropdown-list").addClass("success-border");
+                        checkSuccess = true;*/
+                    }
+                    else {
+                        $(this).parent().hide();
+                    }
+                    /*if (inputText == $(itemDropdown).text()) {
+                        $(this).parent().siblings().removeAttr("selected");
+                        $(this).parent().attr("selected", "");
+                        $(this).parent().siblings().removeClass("selected");
+                        $(this).parent().addClass("selected", "");
+    
+                        $(this).closest(".dropdown-list").addClass("success-border");
+                        checkSuccess = true;
+                    }*/
+                })
             }
             
-        })
-        
-    }
-    /**
-     * Hàm check email hợp lệ
-     * Create by: TTLONG 06/07/2021
-     * */
-    handleEmailValidate() {  
-        $("input[type='email']").blur(function () {
-            var email = $(this).val();
-            if ($(this).val()) {
-                let regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-                if (!regex.test(email)) {
-                    $(this).addClass("border-red");
-                    $(this).attr("title", "Bạn đã nhập sai định dạng email");
-                    $(this).attr("validate", false);
-                } else {
-                    $(this).removeClass("border-red");
-                    $(this).attr("validate", true);
+            /*if (checkSuccess == false) {
+                $(this).parent().removeClass("success-border");
+                $(this).parent().addClass("error-border");
+                $(this).parent().attr("title", "Dữ liệu không tồn tại trong hệ thống");
+          
+            }*/
+            //nếu dropdown có item vả phím nhấn là phím down thì đặt tabindex vào phần tử đầu
+            if ($(this).siblings(".dropdown-list-box").children().length > 0 && e.keyCode != 40) {
+                $(this).siblings(".dropdown-list-box").children(":first").attr("tabindex", -1);
+                //$(this).siblings(".dropdown-list-box").children(":first").focus();
+                /*$.each($(this).siblings(".dropdown-list-box").children(), function () {
+                    if ($(this).attr("tabindex") == -1) {
+                        $(this).focus();
+                    }
+                })*/
+                
+            }
+            
+            var value = $(this).siblings(".dropdown-list-box").children("[tabindex]");
+            if (e.keyCode == 40) {
+                if ($(value).index() == $(this).siblings(".dropdown-list-box").children().length - 1) {
+                    value = $(this).siblings(".dropdown-list-box").children(":first");
                 }
+                /*$(value).next().css("background-color", "#E9EBEE");*/
+                $(value).next().attr("tabindex", -1);
+                $(value).next().siblings().removeAttr("tabindex");
+                /*$(value).css("background-color", "#E9EBEE");*/
             }
-            
+
+
         })
-        
-        
+        $("input.dropdown-input-text").on("keydown", function (e) {
+            if ($(this).siblings(".dropdown-button-select").attr("hide") == "true") {
+                $(this).siblings(".dropdown-button-select").attr("hide", "false");
+                $(this).siblings(".dropdown-list-box").slideDown();
+                $(this).siblings(".dropdown-button-select").css("background-image", "url('../../content/icon/chevron-up.svg')");
+            }
+        });
+
     }
     /**
-     * Hàm tập hợp các Validate
-     * Create by: TTLONG 06/07/2021
+     * Ẩn hiện dropdown
+     * Create by: TTLONG 11/07/2021
      * */
-    handleValidate() {
-        this.handleInputValidate("#txtEmployeeCode");
-        
-        this.handleEmailValidate();
-        /*this.handleInputValidate("#txtFullName");
-        this.handleInputValidate("#txtIdentityCard");
-        this.handleInputValidate("#txtCardIssuer");
-        this.handleInputValidate("#txtEmail");*/
+    toggleDropdown() {
+        if ($(this).attr("hide") == "true") {
+            $(this).attr("hide", "false");
+            $(id + " .dropdown-list-box").show();
+            $(this).css("background-image", "url('../../content/icon/chevron-up.svg')");
+        }
+        else {
+            $(this).attr("hide", "true");
+            $(id + " .dropdown-list-box").hide();
+            $(this).css("background-image", "url('../../content/icon/chevron-down.svg')");
+        }
+        e.stopPropagation();
     }
+    
+
+}
+
+$.fn.getValue = function () {
+    
+      return  this.children(".dropdown-list-box").find(".item-list[selected]").attr("value");
+    
+}
+$.fn.getText = function () {
+    return this.children(".dropdown-list-box").find(".item-list[selected] .item-dropdown-text").text();
+}
+$.fn.getData = function () {
+    var itemDropdowns = $(this).children(".dropdown-list-box").find(".item-list");
+    var data = {
+        value:"",
+        text:""
+    }
+    $.each(itemDropdowns, function (index, item) {
+        data.push($(this).getValue(), $(this).getText());
+    })
+    return data;
 }

@@ -33,7 +33,7 @@
                 background-size:contain;
                 background-repeat:no-repeat;
                 align-self:center;
-                margin-right:8px;
+                
             }
             .nav-item .nav-item-document-online {
                 background-image: url('/content/icon/document-online.png');
@@ -50,3 +50,6 @@
             .nav-item .nav-item-setting {
                 background-image: url('/content/icon/setting.png');
             }
+.navbar .navbar-content .nav-item .nav-item-text {
+    padding-left:8px;
+}

@@ -40,3 +40,35 @@ a{
     box-sizing: border-box;
 
 }
+.loading{
+    display:none;
+}
+.loading-modal{
+    position:fixed;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+    background-color:#000000;
+    opacity:0.5;
+}
+.loading-icon {
+    position: fixed;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    top: calc(50% - 15px);
+    left: calc(50% - 15px);
+    border: 3px solid #b6ff00;
+    border-bottom: 3px solid #808080;
+    border-top: 3px solid #808080;
+    animation: spin 2s linear infinite;
+}
+@keyframes spin{
+    0%{
+        transform:rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}

@@ -34,15 +34,21 @@
 .m-second-button:hover{
     background-color:#e9ebee;
 }
-    .m-btn-refresh {
-        border: 1px solid #bbbbbb;
-        background-image: url(/content/icon/refresh.png);
-        background-repeat: no-repeat;
-        background-position: center;
-        outline: none;
-        height: 40px;
-        width: 40px;
-    }
+.m-btn-refresh, .m-btn-delete {
+    border: 1px solid #bbbbbb;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 24px;
+    outline: none;
+    height: 40px;
+    width: 40px;
+}
+.m-btn-refresh {
+    background-image: url(/content/icon/refresh.png);
+}
+.m-btn-delete {
+    background-image: url(/content/icon/delete.svg);
+}
 
     /*button form*/
 .btn-default {
