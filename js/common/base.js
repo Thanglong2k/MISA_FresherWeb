@@ -99,7 +99,7 @@ class BaseJS {
         //select item dropdown
         me.clickItemDropdown();
         //click dropdown
-        me.clickDropdown();
+        me.handleDropdown();
         
         //click outside object
         me.clickOutsideDropdown();
@@ -183,7 +183,7 @@ class BaseJS {
     * Create by: TTLONG 06/07/2021
     * @param {any} id id của các dropdown
     * */
-     handleDropdown(id) {
+     /*handleDropdown(id) {
         let me = this;
         // hide/show khi click select vị trí:
         $(id + " .dropdown-button-select").click(function (e) {
@@ -198,6 +198,28 @@ class BaseJS {
                 $(id + " .dropdown-list-box").hide();
                 $(this).css("background-image", "url('../../content/icon/chevron-down.svg')");
             }
+            e.stopPropagation();
+        })
+    }*/
+    handleDropdown() {
+        let me = this;
+        // hide/show khi click select vị trí:
+        $(".dropdown-button-select").click(function (e) {
+
+            if ($(this).attr("hide") == "true") {
+                $(this).attr("hide", "false");
+                $(this).siblings(" .dropdown-list-box").show();
+                $(this).css("background-image", "url('../../content/icon/chevron-up.svg')");
+            }
+            else {
+                $(this).attr("hide", "true");
+                $(this).siblings(" .dropdown-list-box").hide();
+                $(this).css("background-image", "url('../../content/icon/chevron-down.svg')");
+            }
+
+            /*$(this).addClass("background-button-select-down");*/
+            /*$(this).toggleClass("background-button-select-up background-button-select-down");
+            $(this).siblings(" .dropdown-list-box").toggle();*/
             e.stopPropagation();
         })
     }
@@ -614,91 +636,174 @@ class BaseJS {
     eventKeyUp() {
         let me = this;
         $("input.dropdown-input-text").keyup(function (e) {
-            
-            var checkSuccess = false;
-            var inputText = $(this).val();
-            var itemDropdowns = $(this).siblings(".dropdown-list-box");
-            
-            if ($(this).text() == "") {
+            if (e.keyCode != 9) {
+                
+                var checkSuccess = false,
+                    inputText = $(this).val(),
+                    itemDropdowns = $(this).siblings(".dropdown-list-box");
+
+                
                 $(itemDropdowns).children(".item-list").removeAttr("selected");
                 $(itemDropdowns).children(".item-list").removeClass("selected");
-            }//có sự kiện nhấn phím thì mở dropdown
-            itemDropdowns = $(itemDropdowns).find(".item-dropdown-text");
-            if ($(this).siblings(".dropdown-button-select").attr("hide") == "true") {
-                $(this).siblings(".dropdown-button-select").attr("hide", "false");
-                $(this).siblings(".dropdown-list-box").slideDown();
-                $(this).siblings(".dropdown-button-select").css("background-image", "url('../../content/icon/chevron-up.svg')");
-            }
-            /*else {
-                $(this).siblings(".dropdown-button-select").attr("hide", "true");
-                $(this).siblings(".dropdown-list-box").hide();
-                $(this).siblings(".dropdown-button-select").css("background-image", "url('../../content/icon/chevron-down.svg')");
-            }*/
-            e.stopPropagation();
-            //nếu input rỗng thì đóng dropdown
-            if (inputText == "") {
-                $(this).siblings(".dropdown-button-select").attr("hide", "true");
-                $(this).siblings(".dropdown-list-box").slideUp();
-                $(this).siblings(".dropdown-button-select").css("background-image", "url('../../content/icon/chevron-down.svg')");
-            }
-            else {
-                //hiện các item có chưa key và ẩn những cái khác
-                $.each(itemDropdowns, function (index, itemDropdown) {
-                    /*$(`itemDropdown:contains("${inputText}")`)*/
-
-                    if ($(itemDropdown).text().toUpperCase().includes(inputText.toUpperCase())) {
-                        $(this).parent().show();
-                        /*$(this).parent().attr("selected", "");
-                        $(this).parent().siblings().removeClass("selected");
-                        $(this).parent().addClass("selected", "");
-    
-                        $(this).closest(".dropdown-list").addClass("success-border");
-                        checkSuccess = true;*/
+                 
+                //có sự kiện nhấn phím thì mở dropdown
+                itemDropdowns = $(itemDropdowns).find(".item-dropdown-text");
+                if (inputText != "") {
+                    if ($(this).siblings(".dropdown-button-select").attr("hide") == "true") {
+                        $(this).siblings(".dropdown-button-select").attr("hide", "false");
+                        $(this).siblings(".dropdown-list-box").slideDown();
+                        $(this).siblings(".dropdown-button-select").css("background-image", "url('../../content/icon/chevron-up.svg')");
                     }
-                    else {
-                        $(this).parent().hide();
-                    }
-                    /*if (inputText == $(itemDropdown).text()) {
-                        $(this).parent().siblings().removeAttr("selected");
-                        $(this).parent().attr("selected", "");
-                        $(this).parent().siblings().removeClass("selected");
-                        $(this).parent().addClass("selected", "");
-    
-                        $(this).closest(".dropdown-list").addClass("success-border");
-                        checkSuccess = true;
-                    }*/
-                })
-            }
-            
-            /*if (checkSuccess == false) {
-                $(this).parent().removeClass("success-border");
-                $(this).parent().addClass("error-border");
-                $(this).parent().attr("title", "Dữ liệu không tồn tại trong hệ thống");
-          
-            }*/
-            //nếu dropdown có item vả phím nhấn là phím down thì đặt tabindex vào phần tử đầu
-            if ($(this).siblings(".dropdown-list-box").children().length > 0 && e.keyCode != 40) {
-                $(this).siblings(".dropdown-list-box").children(":first").attr("tabindex", -1);
-                //$(this).siblings(".dropdown-list-box").children(":first").focus();
-                /*$.each($(this).siblings(".dropdown-list-box").children(), function () {
-                    if ($(this).attr("tabindex") == -1) {
-                        $(this).focus();
-                    }
-                })*/
-                
-            }
-            
-            var value = $(this).siblings(".dropdown-list-box").children("[tabindex]");
-            if (e.keyCode == 40) {
-                if ($(value).index() == $(this).siblings(".dropdown-list-box").children().length - 1) {
-                    value = $(this).siblings(".dropdown-list-box").children(":first");
+                    /*$(this).siblings(".dropdown-button-select").toggleClass("background-button-select-up background-button-select-down");*/
                 }
-                /*$(value).next().css("background-color", "#E9EBEE");*/
-                $(value).next().attr("tabindex", -1);
-                $(value).next().siblings().removeAttr("tabindex");
-                /*$(value).css("background-color", "#E9EBEE");*/
-            }
 
+                /*else {
+                    $(this).siblings(".dropdown-button-select").attr("hide", "true");
+                    $(this).siblings(".dropdown-list-box").hide();
+                    $(this).siblings(".dropdown-button-select").css("background-image", "url('../../content/icon/chevron-down.svg')");
+                }*/
+                e.stopPropagation();
+                //nếu input rỗng thì đóng dropdown
+                if (inputText == "") {
+                    $(this).siblings(".dropdown-button-select").attr("hide", "true");
+                    $(this).siblings(".dropdown-list-box").slideUp();
+                    $(this).siblings(".dropdown-button-select").css("background-image", "url('../../content/icon/chevron-down.svg')");
+                    /*$(this).siblings(".dropdown-button-select").toggleClass("background-button-select-up background-button-select-down");*/
+                }
+                //else
+                    //hiện các item có chưa key và ẩn những cái khác
+                    $.each(itemDropdowns, function (index, itemDropdown) {
+                        /*$(`itemDropdown:contains("${inputText}")`)*/
+
+                        if ($(itemDropdown).text().toUpperCase().includes(inputText.toUpperCase())) {
+                            $(this).parent().show();
+                          
+                        }
+                        else {
+                            $(this).parent().hide();
+                        }
+                        /*if (inputText == $(itemDropdown).text()) {
+                            $(this).parent().siblings().removeAttr("selected");
+                            $(this).parent().attr("selected", "");
+                            $(this).parent().siblings().removeClass("selected");
+                            $(this).parent().addClass("selected", "");
+        
+                            $(this).closest(".dropdown-list").addClass("success-border");
+                            checkSuccess = true;
+                        }*/
+                    })
+                
+
+                /*if (checkSuccess == false) {
+                    $(this).parent().removeClass("success-border");
+                    $(this).parent().addClass("error-border");
+                    $(this).parent().attr("title", "Dữ liệu không tồn tại trong hệ thống");
+              
+                }*/
+                /*//nếu dropdown có item vả phím nhấn là phím down thì đặt tabindex vào phần tử đầu
+                if ($(this).siblings(".dropdown-list-box").children(":visible").length > 0 && e.keyCode!=38 && e.keyCode != 40 && e.keyCode != 13) {
+                    $(this).siblings(".dropdown-list-box").children().removeAttr("tabindex");
+                    $(this).siblings(".dropdown-list-box").children(":visible:first").attr("tabindex", -1);
+                    //$(this).siblings(".dropdown-list-box").children(":first").focus();
+                    $.each($(this).siblings(".dropdown-list-box").children(), function () {
+                        if ($(this).attr("tabindex") == -1) {
+                            $(this).focus();
+                        }
+                    })
+
+                }*/
+
+                var value = $(this).siblings(".dropdown-list-box").children(":visible"),
+                    first = value[0],
+                    last = value[value.length - 1],
+                    key = e.keyCode,
+                    currentIndex = $(value).siblings("[tabindex]");
+                //nếu dropdown có item vả phím nhấn là phím down thì đặt tabindex vào phần tử đầu
+                if ($(value).length > 0 && e.keyCode != 38 && e.keyCode != 40 && e.keyCode != 13) {
+                    $(this).siblings(".dropdown-list-box").children().removeAttr("tabindex");
+                    $(first).attr("tabindex", -1);
+                    /*//$(this).siblings(".dropdown-list-box").children(":first").focus();
+                    $.each($(this).siblings(".dropdown-list-box").children(), function () {
+                        if ($(this).attr("tabindex") == -1) {
+                            $(this).focus();
+                        }
+                    })*/
+
+                }
+                
+                    
+                    //last = value.
+
+                switch (key) {
+                    case 40:
+                       
+                        if ($(currentIndex).is(last)) {
+                            $(first).attr("tabindex", -1);
+                            $(first).siblings().removeAttr("tabindex");
+
+                        } else {
+                            $(currentIndex).next().attr("tabindex",-1);
+                            currentIndex = $(currentIndex).next();
+                            $(currentIndex).siblings().removeAttr("tabindex");
+                        }
+
+                        //$(value).next().siblings().removeAttr("tabindex");
+                        //$(value).next().attr("tabindex", -1);
+                        /*if (value == $(this).siblings(".dropdown-list-box").children(":visible:last")) {
+                            value = $(this).siblings(".dropdown-list-box").children(":visible:first");
+                        }
+                        if ($(value).next().css("display") == "none") {
+                            value = $(value).next();
+                        }
+
+                        $(value).next().siblings().removeAttr("tabindex");
+                        $(value).next().attr("tabindex", -1);*/
+                        break;
+                    //phím lên
+                    case 38:
+                        if ($(currentIndex).is(first)) {
+                            $(last).attr("tabindex", -1);
+                            $(last).siblings().removeAttr("tabindex");
+
+                        } else {
+                            $(currentIndex).prev().attr("tabindex", -1);
+                            currentIndex = $(currentIndex).prev();
+                            $(currentIndex).siblings().removeAttr("tabindex");
+                        }
+                        break;
+                    //phím enter
+                    case 13:
+                        //value = $(this).siblings(".dropdown-list-box").children("[tabindex]");
+                        $(currentIndex).siblings().removeAttr("selected");
+                        $(currentIndex).attr("selected", "selected");
+                        $(currentIndex).siblings().removeClass("selected");
+                        $(currentIndex).addClass("selected");
+                        //set text cho input
+                        $(this).val($(this).parent().getText());
+                        //đóng dropdown
+                        $(this).siblings(".dropdown-button-select").attr("hide", "true");
+                        $(this).siblings(".dropdown-list-box").hide();
+                        $(this).siblings(".dropdown-button-select").css("background-image", "url('../../content/icon/chevron-down.svg')");
+                        break;
+                }
+                
+                
+                
+                /*if (e.keyCode == 13) {
+                    value = $(this).siblings(".dropdown-list-box").children("[tabindex]");
+                    $(value).siblings().removeAttr("selected");
+                    $(value).attr("selected", "selected");
+                    $(value).siblings().removeClass("selected");
+                    $(value).addClass("selected");
+                    //set text cho input
+                    $(this).val($(this).parent().getText());
+                    //đóng dropdown
+                    $(this).siblings(".dropdown-button-select").attr("hide", "true");
+                    $(this).siblings(".dropdown-list-box").hide();
+                    $(this).siblings(".dropdown-button-select").css("background-image", "url('../../content/icon/chevron-down.svg')");
+                }*/
+            }
+            
 
         })
         $("input.dropdown-input-text").on("keydown", function (e) {
@@ -749,4 +854,12 @@ $.fn.getData = function () {
         data.push($(this).getValue(), $(this).getText());
     })
     return data;
+}
+$.fn.setValue = function (value) {
+
+    return this.children(".dropdown-list-box").find(".item-list[selected]").attr("value",value);
+
+}
+$.fn.setText = function (text) {
+    return this.children(".dropdown-list-box").find(".item-list[selected] .item-dropdown-text").text(text);
 }

@@ -50,7 +50,7 @@
             
     }
 .selected {
-    background-color: #019160;
+    background-color: #019160 !important;
     color: #ffffff;
 }
     .selected .icon-check {
@@ -76,3 +76,10 @@
     width: calc(100% - 40px);
     height: 100%;
 }
+.background-button-select-up {
+    background-image: url('../../content/icon/chevron-up.svg') !important;
+}
+.background-button-select-down {
+    background-image: url('../../content/icon/chevron-down.svg');
+}
+

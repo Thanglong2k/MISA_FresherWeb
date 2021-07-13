@@ -9,12 +9,14 @@
 
             let value = $(this).val();
             if (!value) {
-                $(this).addClass("border-red");
-                $(this).attr("title", "Trường này không được phép để trống.");
+
+                $(this).addClass("error-border");
+                //$(this).attr("title", "Trường này không được phép để trống.");
+                $(this).siblings(".tooltip-alert").text("Trường này không được phép để trống.");
                 $(this).attr("validate", false);
             }
             else {
-                $(this).removeClass("border-red");
+                $(this).removeClass("error-border");
                 $(this).attr("validate", true);
             }
 
