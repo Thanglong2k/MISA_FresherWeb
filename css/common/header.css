@@ -6,6 +6,7 @@
     justify-content: space-between;
     display: flex;
     background-color: #FFFFFF;
+    z-index:-1;
     
 }
     .header .header-left {

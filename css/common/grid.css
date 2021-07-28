@@ -1,7 +1,7 @@
 ﻿.grid {
     overflow: auto;
     margin:16px;
-    
+    position:relative;
 
 }
 table {
@@ -13,7 +13,7 @@ table {
     table thead th, table tbody td {
         border-bottom: 1px solid #bbbbbb;
         height: 48px;
-        padding: 10px;
+        padding: 0 10px;
         max-width: 100px;
         box-sizing: border-box;
         /*xử lý chấm chấm đuôi khi text dài*/

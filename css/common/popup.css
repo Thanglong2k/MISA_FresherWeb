@@ -1,0 +1,32 @@
+﻿.popup-content {
+    height: 160px !important;
+    width: 400px !important;
+    position: fixed;
+    background-color: #ffffff;
+    z-index: 10;
+    top: calc(50% - 80px) !important;
+    left: calc(50% - 200px) !important;
+    border-radius: 5px;
+}
+    .popup-content .dialog-header .dialog-header-title {
+        text-transform: none;
+    }
+span{
+    font-weight:bold;
+}
+.icon-yellow, .icon-red {
+    padding: 5px;
+    border-radius: 50%;
+    background-color: #E9EBEE;
+    align-items: center;
+    height:20px;
+    width:20px;
+    margin-right:10px
+}
+.icon-red{
+    color: #be0909;
+    
+}
+.icon-yellow {
+    color: #e7b209;
+}

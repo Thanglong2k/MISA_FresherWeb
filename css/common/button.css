@@ -79,3 +79,16 @@
     .btn-green:active {
         background-color: #01B075;
     }
+.btn-popup-left {
+    background-color: #E9EBEE;
+    justify-content: space-around;
+    margin-right:0;
+}
+    .btn-popup-left:hover {
+        background-color: #ccc;
+    }
+.btn-popup-delete {
+    background-color: #dd2c2c;
+    color: #ffffff;
+    justify-content: space-around;
+}

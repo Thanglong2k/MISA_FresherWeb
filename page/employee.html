@@ -2,9 +2,10 @@
 <html>
 <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title></title>
     <link rel="shortcut icon" href="#" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link href="/css/common/main.css" rel="stylesheet" />
     <link href="/css/common/header.css" rel="stylesheet" />
     <link href="/css/common/navbar.css" rel="stylesheet" />
@@ -14,9 +15,11 @@
     <link href="/css/common/button.css" rel="stylesheet" />
     <link href="/css/common/toolbar.css" rel="stylesheet" />
     <link href="/css/common/input.css" rel="stylesheet" />
+    <link href="/css/common/alert.css" rel="stylesheet" />
     <link href="/css/common/grid.css" rel="stylesheet" />
     <link href="/css/common/tooltip.css" rel="stylesheet" />
-    <link href="../css/common/common.css" rel="stylesheet" />
+    <link href="/css/common/common.css" rel="stylesheet" />
+    <link href="/css/common/popup.css" rel="stylesheet" />
     <link href="/css/page/employee.css" rel="stylesheet" />
 </head>
 <body>
@@ -200,7 +203,7 @@
         </div>
     </div>
 
-    <div class="m-dialog dialog-detail" style="display:none" >
+    <div class="m-dialog dialog-detail" style="display:none">
         <div class="dialog-modal"></div>
         <div class="dialog-content">
             <div class="dialog-header">
@@ -232,34 +235,34 @@
                             <div class="m-row">
                                 <div class="form-item">
                                     <div class="m-label">Mã nhân viên (<span class="required">*</span>)</div>
-                                    <div>
-                                        <input class="m-control tooltip" id="txtEmployeeCode" fieldName="EmployeeCode" type="text" required tabindex="1" />
+                                    <div class="tooltip">
+                                        <input class="m-control" id="txtEmployeeCode" fieldName="EmployeeCode" type="text" required tabindex="1" />
                                         <span class="tooltip-alert"></span>
                                     </div>
-                                    
+
                                 </div>
                                 <div class="form-item">
                                     <div class="m-label">Họ và tên (<span class="required">*</span>)</div>
-                                    <div>
-                                        <input class="m-control tooltip" id="txtFullName" fieldName="FullName" type="text" required tabindex="2" />
+                                    <div class="tooltip">
+                                        <input class="m-control" id="txtFullName" fieldName="FullName" type="text" required tabindex="2" />
                                         <span class="tooltip-alert"></span>
                                     </div>
-                                  
+
                                 </div>
                             </div>
                             <div class="m-row">
                                 <div class="form-item">
                                     <div class="m-label">Ngày sinh</div>
-                                    <div>
-                                        <input class="m-control tooltip" id="dtDateOfBirth" fieldName="DateOfBirth" type="date" tabindex="3" />
+                                    <div class="tooltip">
+                                        <input class="m-control" id="dtDateOfBirth" fieldName="DateOfBirth" type="date" tabindex="3" />
                                         <span class="tooltip-alert"></span>
                                     </div>
-                                 
+
                                 </div>
                                 <div class="form-item">
                                     <div class="m-label">Giới tính</div>
                                     <div class="dropdown-list  dropdown-form" fieldName="GenderName" fieldValue="Gender" id="dropdown-gender">
-                                        <input type="text" id="drpGender" fieldName="Gender" class="dropdown-input-text" tabindex="4"/>
+                                        <input type="text" id="drpGender" fieldName="Gender" class="dropdown-input-text" tabindex="4" />
                                         <div class="dropdown-button-select" hide=true></div>
 
                                         <div class="dropdown-list-box" style="display:none;">
@@ -285,31 +288,31 @@
 
                                 <div class="form-item">
                                     <div class="m-label">Số CMTND/Căn cước (<span class="required">*</span>)</div>
-                                    <div>
+                                    <div class="tooltip">
 
-                                        <input class="m-control tooltip" id="txtIdentityNumber" fieldName="IdentityNumber" type="text" required tabindex="5" />
+                                        <input class="m-control" id="txtIdentityNumber"  fieldName="IdentityNumber" type="text" required tabindex="5" />
                                         <span class="tooltip-alert"></span>
                                     </div>
-                                  
+
                                 </div>
                                 <div class="form-item">
                                     <div class="m-label">Ngày cấp</div>
-                                    <div>
-                                        <input class="m-control tooltip" id="dtIdentityDate" fieldName="IdentityDate" type="date" tabindex="6" />
+                                    <div class="tooltip">
+                                        <input class="m-control" id="dtIdentityDate" fieldName="IdentityDate" type="date" tabindex="6" />
                                         <span class="tooltip-alert"></span>
                                     </div>
-                                    
+
                                 </div>
 
                             </div>
                             <div class="m-row">
                                 <div class="form-item">
                                     <div class="m-label">Nơi cấp</div>
-                                    <div>
-                                        <input class="m-control tooltip" id="txtIdentityPlace" fieldName="IdentityPlace" type="text" tabindex="7" />
+                                    <div class="tooltip">
+                                        <input class="m-control" id="txtIdentityPlace" fieldName="IdentityPlace" type="text" tabindex="7" />
                                         <span class="tooltip-alert"></span>
                                     </div>
-                                 
+
                                 </div>
                                 <div class="form-item"></div>
 
@@ -317,19 +320,19 @@
                             <div class="m-row">
                                 <div class="form-item">
                                     <div class="m-label">Email (<span class="required">*</span>)</div>
-                                    <div>
-                                        <input class="m-control tooltip" id="txtEmail" fieldName="Email" type="email" placeholder="example123@gmail.com" required tabindex="8" />
+                                    <div class="tooltip">
+                                        <input class="m-control" id="txtEmail" fieldName="Email" type="email" placeholder="example123@gmail.com" required tabindex="8" />
                                         <span class="tooltip-alert"></span>
                                     </div>
-                                 
+
                                 </div>
                                 <div class="form-item">
                                     <div class="m-label">Số điện thoại (<span class="required">*</span>)</div>
                                     <div class="tooltip">
-                                        <input class="m-control tooltip" id="txtPhoneNumber" fieldName="PhoneNumber" type="number" required tabindex="9" />
+                                        <input class="m-control" id="txtPhoneNumber" fieldName="PhoneNumber" type="text" required tabindex="9" />
                                         <span class="tooltip-alert"></span>
                                     </div>
-                                   
+
                                 </div>
                             </div>
                         </div>
@@ -344,7 +347,7 @@
                                 <div class="form-item">
                                     <div class="m-label">Vị trí</div>
                                     <div class="dropdown-list  dropdown-form" fieldValue="PositionId" fieldName="PositionName" api="/v1/Positions" id="dropdown-form-position">
-                                        <input type="text" id="drpPosition" fieldName="PositionId" class="dropdown-input-text" tabindex="10"/>
+                                        <input type="text" id="drpPosition" fieldName="PositionId" class="dropdown-input-text" tabindex="10" />
                                         <div class="dropdown-button-select" hide=true></div>
 
                                         <div class="dropdown-list-box" style="display:none;">
@@ -355,8 +358,8 @@
                                 </div>
                                 <div class="form-item">
                                     <div class="m-label">Phòng ban</div>
-                                    <div class="dropdown-list dropdown-form" fieldValue="DepartmentId" fieldName="DepartmentName" api="/api/Department" id="dropdown-form-department" >
-                                        <input type="text" id="drpDepartment" fieldValue="DepartmentId" fieldName="DepartmentName" class="dropdown-input-text" tabindex="11"/>
+                                    <div class="dropdown-list dropdown-form" fieldValue="DepartmentId" fieldName="DepartmentName" api="/api/Department" id="dropdown-form-department">
+                                        <input type="text" id="drpDepartment" fieldValue="DepartmentId" fieldName="DepartmentName" class="dropdown-input-text" tabindex="11" />
                                         <div class="dropdown-button-select" hide=true></div>
 
                                         <div class="dropdown-list-box" style="display:none;">
@@ -370,10 +373,10 @@
                                 <div class="form-item">
                                     <div class="m-label">Mã số thuế cá nhân</div>
                                     <div>
-                                        <input class="m-control tooltip" id="txtPersonalTaxCode" fieldName="PersonalTaxCode" type="text" tabindex="12" />
+                                        <input class="m-control" id="txtPersonalTaxCode" fieldName="PersonalTaxCode" type="text" tabindex="12" />
                                         <span class="tooltip-alert"></span>
                                     </div>
-                                    
+
                                 </div>
                                 <div class="form-item">
                                     <div class="m-label">Mức lương cơ bản</div>
@@ -381,7 +384,7 @@
                                         <input class="m-control" id="txtSalary" fieldName="Salary" type="text" tabindex="13" />
                                         <span class="tooltip-alert"></span>
                                     </div>
-                                    
+
                                 </div>
                             </div>
                             <div class="m-row">
@@ -391,12 +394,12 @@
                                         <input class="m-control" id="dtJoinDate" fieldName="JoinDate" type="date" tabindex="14" />
                                         <span class="tooltip-alert"></span>
                                     </div>
-                                    
+
                                 </div>
                                 <div class="form-item">
                                     <div class="m-label">Tình trạng công việc</div>
                                     <div class="dropdown-list  dropdown-form" fieldValue="WorkStatus" id="dropdown-form-workstatus">
-                                        <input type="text" id="txtWorkStatus" fieldName="WorkStatus" class="dropdown-input-text" tabindex="15"/>
+                                        <input type="text" id="txtWorkStatus" fieldName="WorkStatus" class="dropdown-input-text" tabindex="15" />
                                         <div class="dropdown-button-select" id="test-btn" hide=true></div>
 
                                         <div class="dropdown-list-box" style="display:none;">
@@ -412,7 +415,7 @@
                                                 <div class="icon-check"></div>
                                                 <div class="item-dropdown-text">Khác</div>
                                             </div>
-                                            
+
 
                                         </div>
                                     </div>
@@ -438,35 +441,57 @@
         <div class="loading-icon"></div>
 
     </div>
-    <div class="toast">
-        <div class="toast-icon">
-            <i class="fas fa-check-circle"></i>
-        </div>
-        <div class="toast-body">
-            <h3 class="toast-title">Success</h3>
-            <p class="toast-msg">Thành công</i>
-        </div>
-        <div class="toast-close">
-            <i class="fal fa-times-circle"></i>
-        </div>
+    <div id="toast">
+
     </div>
-    <!--thứ tự nhúng jquery :jquery,common,js-->
-    <script src="/lib/jquery-3.6.0.min.js"></script>
-    <script src="/lib/jquery-ui.min.js"></script>
-    <script src="/js/common/common.js"></script>
-    <script src="/js/common/base.js"></script>
-    <script src="/js/common/validate.js"></script>
-    <script src="/js/page/employee.js"></script>
+    
+    <div id="popup">
+    </div>
+        <!--<div class="m-dialog dialog-detail">
+            <div class="dialog-modal"></div>
+            <div class="dialog-content">
+                <div class="dialog-header">
+                    <div class="dialog-header-title">Đóng form thông tin chung</div>
+                    <div class="dialog-header-close">
+                        <button id="btnClose"></button>
+                    </div>
+                </div>
+                <div class="dialog-body">
+                   <div class="dialog-body-icon"></div>
+                   <div class="dialog-body-message"></div>
+                </div>
+                <div class="dialog-footer">
+                    <button class="btn-default btnForm" id="btnCancel" Command="Cancel">Hủy</button>
+                    <button class="btn-default btn-green btnForm" id="btnSave" Command="Save">
+                        <div class="m-btn-icon icon-save"></div>
+                        <div class="btn-text">Lưu</div>
+                    </button>
+                </div>
+            </div>
 
-    <!--<script>
-        function formatMoney(money) {
-            var num = money.toFixed(1).replace(/\d(?=(\d{3})+\.)/g, "$&.");
-            return num;
+        </div>-->
+        <!--thứ tự nhúng jquery :jquery,common,js-->
+        <script src="/lib/jquery-3.6.0.min.js"></script>
+        <script src="/lib/jquery-ui.min.js"></script>
+        <script src="/js/common/common.js"></script>
 
-        }
-        var tien = "";
-        tien = formatMoney(2000000)
-        document.getElementById("salary").innerHTML = tien;
-    </script>-->
+        <script src="/js/common/filter.js"></script>
+        <script src="/js/common/base.js"></script>
+        <script src="/js/common/toast.js"></script>
+        <script src="/js/common/popup.js"></script>
+        <script src="/js/common/validate.js"></script>
+        <script src="/js/page/employee.js"></script>
+
+
+        <!--<script>
+            function formatMoney(money) {
+                var num = money.toFixed(1).replace(/\d(?=(\d{3})+\.)/g, "$&.");
+                return num;
+
+            }
+            var tien = "";
+            tien = formatMoney(2000000)
+            document.getElementById("salary").innerHTML = tien;
+        </script>-->
 </body>
 </html>

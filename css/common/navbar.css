@@ -1,9 +1,10 @@
 ﻿.navbar {
     float:left;
     width: 220px;
-    height: 100vh;
+    height: calc(100vh - 61px);
     background-color: #ffffff;
     border-right: 1px solid #e5e5e5;
+    
 }
     
     .navbar .navbar-content {
@@ -25,7 +26,7 @@
         .navbar .navbar-content .nav-item:focus {
             font-size: 13px;
             background-color: #019160;
-            color: ##019160;
+            color: #ffffff;
         }
             .navbar .navbar-content .nav-item .nav-item-icon {
                 width: 20px;

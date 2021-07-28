@@ -1,22 +1,25 @@
 ﻿.tooltip {
     position: relative;
     display: inline-block;
+   width:100%;
    
 }
 
     .tooltip .tooltip-alert {
         visibility: hidden;
-       
-        background-color: black;
+        width: 70%;
+        background-color: red;
         color: #fff;
         text-align: center;
         border-radius: 6px;
-        padding: 5px 0;
+        padding: 10px;
         position: absolute;
         z-index: 1;
         bottom: 150%;
-        left: 50%;
+        left: 40%;
         margin-left: -60px;
+        box-sizing: border-box;
+        z-index: 10000;
     }
 
         .tooltip span.tooltip-alert::after {
@@ -28,9 +31,9 @@
             margin-left: -5px;
             border-width: 5px;
             border-style: solid;
-            border-color: black transparent transparent transparent;
+            border-color: red transparent transparent transparent;
         }
 
-    .tooltip:hover .tooltip-alert, .tooltip:hover .tooltip-alert::after {
+    .tooltip:hover input[validate=false] ~ .tooltip-alert, .tooltip:hover input[validate=false] ~ .tooltip-alert::after {
         visibility: visible;
     }
